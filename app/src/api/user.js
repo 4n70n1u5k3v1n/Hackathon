@@ -1,6 +1,8 @@
 import axios from "axios";
 
 const BASE_URL = "https://hackathon-lu32dxaw4a-uc.a.run.app/api";
+// const BASE_URL = "http://localhost:8080/api"; 
+
 
 export const getUserPoints = async (userID) => {
     try {

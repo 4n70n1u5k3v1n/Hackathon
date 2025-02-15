@@ -26,7 +26,7 @@ const ChallengesList = ({userId}) => {
   }, []);
 
   if (loading) {
-    return <p> Loading events... </p>;
+    return <p> Loading challenges... </p>;
   }
 
   if (error) {
