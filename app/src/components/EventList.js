@@ -59,13 +59,13 @@ const EventList = ({ userId }) => {
             day: "numeric"
         });
 
-        const eventTime = new Date('1970-01-01T${time}').toLocaleTimeString("en-US", {
+        const eventTime = new Date(`1970-01-01T${time}`).toLocaleTimeString("en-US", {
             hour: "numeric",
             minute: "2-digit",
             hour12: true 
         });
 
-        return '${formattedDate} at ${eventTime}';
+        return `${formattedDate} at ${eventTime}`;
     };
 
     if (loading) {
