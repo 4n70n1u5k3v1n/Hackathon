@@ -1,16 +1,17 @@
-import React from 'react';
-import Header from '../components/Header';
-import Navbar from '../components/Navbar';
+import React from "react";
+import Header from "../components/Header";
+import Navbar from "../components/Navbar";
+import EventList from "../components/EventList";
 import ClientWebCam from "../components/ClientWebCam";
 
 const Events = () => {
   return (
     <div>
       <Header />
-      <div style={{ padding: '20px' }}>
+      <div style={{ padding: "20px" }}>
         <h2>Events Page</h2>
-          <ClientWebCam/>
-        {/* Add events content here */}
+        <EventList /> 
+        <ClientWebCam />
       </div>
       <Navbar />
     </div>
