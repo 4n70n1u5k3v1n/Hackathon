@@ -103,20 +103,27 @@ CREATE TABLE SKILLS (
     skill_name VARCHAR(100) UNIQUE
 );
 
-CREATE TABLE USER_SKILL_OFFER (
-    user_id INT,
+CREATE TABLE USER_SKILL_MATCH (
+    requestor_id INT,
+    acceptor_id INT NULL,
     skills_id INT,
-    PRIMARY KEY (user_id, skills_id),
-    FOREIGN KEY (user_id) REFERENCES USER(user_id),
-    FOREIGN KEY (skills_id) REFERENCES SKILLS(skill_id)
+    skills_id_2 INT,
+    status ENUM('requested', 'accepted') NULL,
+    PRIMARY KEY (requestor_id, skills_id),
+    FOREIGN KEY (requestor_id) REFERENCES USER(user_id),
+    FOREIGN KEY (acceptor_id) REFERENCES USER(user_id),
+    FOREIGN KEY (skills_id) REFERENCES SKILLS(skill_id),
+    FOREIGN KEY (skills_id_2) REFERENCES SKILLS(skill_id)
 );
 
-CREATE TABLE USER_SKILL_WANT (
+CREATE TABLE USER_REDEMPTION (
+    REDEMPTION_ID INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
-    skills_id INT,
-    PRIMARY KEY (user_id, skills_id),
+    item_id INT,
+    quantity INT,
+    redemption_date DATETIME,
     FOREIGN KEY (user_id) REFERENCES USER(user_id),
-    FOREIGN KEY (skills_id) REFERENCES SKILLS(skill_id)
+    FOREIGN KEY (item_id) REFERENCES ITEM(item_id)
 );
 
 CREATE TABLE USER_RECOMMENDATIONS (
