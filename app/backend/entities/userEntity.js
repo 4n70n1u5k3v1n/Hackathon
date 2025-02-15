@@ -44,7 +44,7 @@ exports.redeemItem = async (userID, itemID) => {
 exports.updatePoints = async (userId, ptIncrease) => {
     try {
         const query = 'UPDATE USER SET user_gc = user_gc + ? WHERE user_id = ?';
-        await db.execute(query, [userId, ptIncrease]);
+        await db.execute(query, [ptIncrease, userId]);
         console.log('Points update success');
         return { success: true, message: "User's points have been added successfully" };
     } catch (error) {

@@ -3,6 +3,7 @@ import jsQR from "jsqr";
 import qrlogo from "./qrlogo.svg";
 import "./ClientWebCam.css"; // Import CSS
 import { takeAttendance } from "../api/events";
+import Swal from "sweetalert2";
 
 const ClientWebCam = (userID) => {
   const [stream, setStream] = useState(null);
@@ -121,10 +122,22 @@ const ClientWebCam = (userID) => {
       const data = await takeAttendance('1', qrCodeDataFormat);
 
       if (data) {
-        alert('Attendance Successful!');
+        Swal.fire({
+          title: "Success!",
+          text: "Attendance Successful!",
+          icon: "success",
+          confirmButtonText: "OK"
+      }).then(() => {
+          window.location.reload(); // Reloads the page after user clicks "OK"
+      });
       } else {
-        alert('Event attendance failed');
-      }
+        Swal.fire({
+            title: "Error",
+            text: "Event attendance failed",
+            icon: "error",
+            confirmButtonText: "OK"
+      });
+  }
       
     } catch (err) {
       console.error ("Error taking attendance frontend:", err);
