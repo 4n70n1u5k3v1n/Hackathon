@@ -1,0 +1,21 @@
+/* Container for the entire carousel with a rounded square background */
+.carousel-container {
+    margin: 15px auto;         /* auto centers the container horizontally */
+    padding: 20px;             /* increased padding for spacing */
+    background-color: #f8f9fa;   /* light background color */
+    border-radius: 15px;       /* rounded corners */
+    max-width: 800px;          /* constrains the width */
+    text-align: center;        /* center content inside the container */
+    overflow: hidden;          /* hide any overlapping content */
+}
+
+/* Each event card with its own rounded square background */
+.event-card {
+    background-color: #ece3e3;
+    padding: 15px;             /* added padding so content isn't flush to the edges */
+    border-radius: 20px;
+    text-align: left;
+    margin: 15px auto;         /* centers the card and provides vertical spacing */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 90%;            /* keeps event cards from stretching too wide */
+}
