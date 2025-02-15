@@ -52,7 +52,12 @@ const EventCarousel = () => {
                   {new Date(event.event_date).toLocaleDateString()}
                 </p>
                 <p>
-                  <strong>Time:</strong> {event.event_time}
+                  <strong>Time:</strong>{' '}
+                  {new Date(`1970-01-01T${event.event_time}`).toLocaleTimeString("en-US", {
+                    hour: "numeric",
+                    minute: "2-digit",
+                    hour12: true
+                  })}
                 </p>
                 <p>
                   <strong>Location:</strong> {event.event_location}
