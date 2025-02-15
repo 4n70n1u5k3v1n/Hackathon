@@ -26,6 +26,7 @@ export const checkUserEvent = async (userId, eventId) => {
     }
 };
 
+
 export const registerUserForEvent = async (userId, eventId) => {
     try {
         const response = await axios.post(`${BASE_URL}/register`, {
@@ -35,6 +36,21 @@ export const registerUserForEvent = async (userId, eventId) => {
         return response.data;
     } catch (error) {
         console.error("Error registering user for event:", error);
+        throw error;
+    }
+};
+
+export const takeAttendance = async (userId, eventToken) => {
+    try {
+        console.log('take attendance api');
+        console.log('userID', userId);
+        console.log('eventtoken', eventToken);
+        const response = await axios.get(`${BASE_URL}/takeattendance`, {
+            params: { userId, eventToken }
+        });
+        return response.data;
+    } catch (error) {
+        console.error ("Error taking attendance api: ", error);
         throw error;
     }
 };
