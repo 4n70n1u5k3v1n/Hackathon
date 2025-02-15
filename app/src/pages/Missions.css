@@ -4,7 +4,7 @@
   position: relative;
   background-color: #FFFBF5;
   width: 100%;  
-  min-height: 100vh; /* Ensure the container takes at least the full height of the viewport */
+  min-height: 88vh; /* Ensure the container takes at least the full height of the viewport */
   display: flex;
   flex-direction: column;
   padding-top: 60px; 

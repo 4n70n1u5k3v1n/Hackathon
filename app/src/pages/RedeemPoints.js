@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { getAllItems } from '../api/items';
 import { getUserPoints, redeemItem } from '../api/user';
 import './RedeemPoints.css';
+import Swal from 'sweetalert2';
 
 const RedeemPoints = ({ userID }) => {
     const navigate = useNavigate();
@@ -45,7 +46,11 @@ const RedeemPoints = ({ userID }) => {
 
     const handleRedeem = async (itemID, itemPoints) => {
         if (points < itemPoints) {
-            alert("Not enough points to redeem this item.");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Not enough points to redeem this item.',
+            });
             return;
         }
 
@@ -55,13 +60,25 @@ const RedeemPoints = ({ userID }) => {
 
             if (response.success) {
                 setPoints((prevPoints) => prevPoints - itemPoints);
-                alert("Item successfully redeemed!");
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: 'Item successfully redeemed!',
+                });
             } else {
-                alert(response.message || "Failed to redeem item. Please try again.");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Failed',
+                    text: response.message || 'Failed to redeem item. Please try again.',
+                });
             }
         } catch (err) {
             console.error("Error redeeming item:", err);
-            alert("Error processing redemption.");
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error processing redemption.',
+            });
         } finally {
             setRedeeming(false);
         }
@@ -95,8 +112,8 @@ const RedeemPoints = ({ userID }) => {
                                 alt={product.item_name}
                                 className="redeemPoints-productImage"
                             />
-                            <h3>{product.item_name}</h3>
-                            <p>{product.item_gc} Points</p>
+                            <h3 style={{fontSize:'22px'}}>{product.item_name}</h3>
+                            <p style={{fontSize:'18px'}}>{product.item_gc} Points</p>
                             <button 
                                 className="redeemPoints-redeemButton"
                                 onClick={() => handleRedeem(product.item_id, product.item_gc)}

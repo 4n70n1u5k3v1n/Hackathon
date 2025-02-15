@@ -299,6 +299,7 @@ const Skills = ({userID}) => {
             )}
             </div>
             <Navbar />
+            {isSidebarOpen && (<ProfileSidebar onClose={() => setIsSidebarOpen(false)} style={{ left: isSidebarOpen ? '0' : '-50%' }} />)}
         </div>
     );
 };

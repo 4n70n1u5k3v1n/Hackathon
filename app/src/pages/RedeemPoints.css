@@ -47,6 +47,7 @@
   
   .redeemPoints-productList {
     margin-top: 10px;
+
   }
   
   .redeemPoints-productCard {
@@ -63,5 +64,17 @@
     height: 80%;
     object-fit: cover;
     border-radius: 10px;
+  }
+
+  .redeemPoints-redeemButton{
+    color: #fffbf3;
+    background-color: #4c956c;
+    border-radius: 20px;
+    padding: 10px;
+    border: none;
+    font-size: 14px;
+  }
+  .h3{
+    font-size: 30px;
   }
   

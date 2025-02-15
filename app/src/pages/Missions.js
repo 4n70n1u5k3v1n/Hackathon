@@ -19,13 +19,7 @@ const Missions = ({userID}) => {
 
   return (
     <div>
-      <div
-      style={{
-        filter: isSidebarOpen ? 'blur(5px)' : 'none',
-        opacity: isSidebarOpen ? 0.5 : 1,
-        pointerEvents: isSidebarOpen ? 'none' : 'auto',
-      }}
-    >
+      
     <Header onProfileClick={handleProfileClick} userID={userID}/>
       <div>
         <div className="mission-container">
@@ -41,7 +35,7 @@ const Missions = ({userID}) => {
         </div>
       </div>
       <Navbar />
-      </div>
+      
       {isSidebarOpen && (<ProfileSidebar onClose={() => setIsSidebarOpen(false)} style={{ left: isSidebarOpen ? '0' : '-50%' }} />)}
     </div>
   );

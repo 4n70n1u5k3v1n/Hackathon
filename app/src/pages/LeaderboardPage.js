@@ -34,13 +34,6 @@ const LeaderboardPage = ({userID}) => {
 
   return (
     <div >
-      <div
-        style={{
-          filter: isSidebarOpen ? 'blur(5px)' : 'none',
-          opacity: isSidebarOpen ? 0.5 : 1,
-          pointerEvents: isSidebarOpen ? 'none' : 'auto',
-        }}
-      >
       <Header onProfileClick={handleProfileClick} userID={userID}/>
       <div className="leaderboardPage-container">
         <h2 className="leaderboardPage-title">Leaderboard</h2>
@@ -76,7 +69,7 @@ const LeaderboardPage = ({userID}) => {
           ))}
         </div>
       </div>
-      </div>
+      
       <Navbar />
       {isSidebarOpen && (<ProfileSidebar onClose={() => setIsSidebarOpen(false)} style={{ left: isSidebarOpen ? '0' : '-50%' }} />)}
     </div>
