@@ -19,6 +19,7 @@ CREATE TABLE TAG (
 CREATE TABLE USER_TAG (
     tag_id INT,
     user_id INT,
+    tag_count INT,
     PRIMARY KEY (tag_id, user_id),
     FOREIGN KEY (tag_id) REFERENCES TAG(tag_id),
     FOREIGN KEY (user_id) REFERENCES USER(user_id)
