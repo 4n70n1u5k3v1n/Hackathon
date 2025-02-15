@@ -1,4 +1,5 @@
-const { fetchAllEvents, checkUserRegistration, registerUserForEvent, getEventFromToken, getEventByUserID } = require("../entities/eventEntity");
+const { fetchAllEvents, checkUserRegistration, registerUserForEvent, getEventFromToken, getEventByUserID, editAttendance } = require("../entities/eventEntity");
+const { updatePoints } = require ("../entities/userEntity");
 
 exports.getAllEvents = async (req, res) => {
     try {
@@ -44,9 +45,9 @@ exports.getEventbyToken = async (req, res) => {
 }
 
 exports.getEventbyUserID = async (req, res) => {
-    const {userID} = req.body;
+    const {userId} = req.body;
     try{
-        const result = await getEventByUserID(userID);
+        const result = await getEventByUserID(userId);
         res.status(201).json(result);
     } catch (error) {
         console.error ("Error getting event:", error);
@@ -55,12 +56,24 @@ exports.getEventbyUserID = async (req, res) => {
 }
 
 exports.takeAttendance = async (req, res) => {
-    const {userID, eventToken} = req.query;
+    const {userId, eventToken} = req.query;
     try {
         const eventName = await getEventFromToken(eventToken);
-        res.status(201).json(eventName);
+        
+        if (eventName) {
+            const eventID = eventName[0].event_id;
+            const userAttends = await checkUserRegistration(userId, eventID);
+            
+            if (userAttends) {
+                await editAttendance (userId, eventID);
+                await updatePoints (userId, 500);
+            }
+            res.status(201).json(true);
+        }
+
+        res.status(201).json(false);
     } catch (error) {
         console.error ("Error checking attendance: ", error);
-        res.status(500).json({ success: false, error: "Internall server error." });
-    }
+        res.status(500).json({ success: false, error: "Internal server error." });
+    }
 }

@@ -1,3 +1,4 @@
+
 const db = require("../db");
 
 exports.fetchAllEvents = async () => {
@@ -51,3 +52,13 @@ exports.getEventByUserID = async (userID) => {
         console.error("Error fetching all events:", error);
     }
 };
+
+exports.editAttendance = async (userId, eventId) => {
+    try {
+        const query = 'UPDATE USER_EVENT SET STATUS = "attended" WHERE user_id = ? AND event_id = ?';
+        await db.execute(query, [userId, eventId]);
+        return { success: true, message: "User's attendance taken successfully" };
+    } catch (error) {
+        console.error("Error taking user's attendance");
+    }
+}
