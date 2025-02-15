@@ -1,8 +1,9 @@
 import React from 'react';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
+import "./LeaderboardPage.css"; // Import the CSS file
 
-const LeaderboardPage = ({userID}) => {
+const LeaderboardPage = ({ userID }) => {
   const users = [
     { id: 1, name: 'User1', points: 5000 },
     { id: 2, name: 'User2', points: 4500 },
@@ -17,39 +18,39 @@ const LeaderboardPage = ({userID}) => {
   const remainingUsers = users.slice(3); // Remaining users for the list
 
   return (
-    <div>
+    <div className="container">
       <Header />
-      <div style={styles.container}>
-        <h2 style={styles.title}>Leaderboard</h2>
+      <div>
+        <h2 className="title">Leaderboard</h2>
 
         {/* Podium for Top 3 */}
-        <div style={styles.podium}>
+        <div className="podium">
           {/* 2nd Place */}
-          <div style={styles.podiumSecond}>
-            <h3 style={styles.podiumName}>{top3[1].name}</h3>
-            <p style={styles.podiumPoints}>{top3[1].points} Points</p>
+          <div className="podiumSecond">
+            <h3 className="podiumName">{top3[1].name}</h3>
+            <p className="podiumPoints">{top3[1].points} Points</p>
           </div>
 
           {/* 1st Place */}
-          <div style={styles.podiumFirst}>
-            <h3 style={styles.podiumName}>{top3[0].name}</h3>
-            <p style={styles.podiumPoints}>{top3[0].points} Points</p>
+          <div className="podiumFirst">
+            <h3 className="podiumName">{top3[0].name}</h3>
+            <p className="podiumPoints">{top3[0].points} Points</p>
           </div>
 
           {/* 3rd Place */}
-          <div style={styles.podiumThird}>
-            <h3 style={styles.podiumName}>{top3[2].name}</h3>
-            <p style={styles.podiumPoints}>{top3[2].points} Points</p>
+          <div className="podiumThird">
+            <h3 className="podiumName">{top3[2].name}</h3>
+            <p className="podiumPoints">{top3[2].points} Points</p>
           </div>
         </div>
 
         {/* List of Remaining Users */}
-        <div style={styles.userList}>
+        <div className="userList">
           {remainingUsers.map((user, index) => (
-            <div key={user.id} style={styles.userRow}>
-              <span style={styles.userRank}>{index + 4}.</span>
-              <span style={styles.userName}>{user.name}</span>
-              <span style={styles.userPoints}>{user.points} Points</span>
+            <div key={user.id} className="userRow">
+              <span className="userRank">{index + 4}.</span>
+              <span className="userName">{user.name}</span>
+              <span className="userPoints">{user.points} Points</span>
             </div>
           ))}
         </div>
@@ -57,89 +58,6 @@ const LeaderboardPage = ({userID}) => {
       <Navbar />
     </div>
   );
-};
-
-const styles = {
-  container: {
-    padding: '20px',
-  },
-  title: {
-    marginBottom: '20px',
-    fontSize: '1.5rem',
-    fontWeight: 'bold',
-  },
-  podium: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'flex-end',
-    gap: '20px',
-    marginBottom: '20px',
-  },
-  podiumFirst: {
-    backgroundColor: '#ffd700',
-    padding: '20px',
-    borderRadius: '10px',
-    textAlign: 'center',
-    width: '100px',
-    height: '150px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
-  podiumSecond: {
-    backgroundColor: '#c0c0c0',
-    padding: '20px',
-    borderRadius: '10px',
-    textAlign: 'center',
-    width: '100px',
-    height: '120px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
-  podiumThird: {
-    backgroundColor: '#cd7f32',
-    padding: '20px',
-    borderRadius: '10px',
-    textAlign: 'center',
-    width: '100px',
-    height: '90px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
-  podiumName: {
-    margin: 0,
-    fontSize: '1.2rem',
-    fontWeight: 'bold',
-  },
-  podiumPoints: {
-    margin: 0,
-    fontSize: '0.9rem',
-  },
-  userList: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '10px',
-  },
-  userRow: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#f8f9fa',
-    borderRadius: '10px',
-    padding: '10px',
-  },
-  userRank: {
-    fontWeight: 'bold',
-  },
-  userName: {
-    flex: 1,
-    marginLeft: '10px',
-  },
-  userPoints: {
-    fontWeight: 'bold',
-  },
 };
 
 export default LeaderboardPage;

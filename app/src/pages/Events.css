@@ -1,0 +1,22 @@
+/* Events.css */
+.events-container {
+  position: relative;
+  background-color: #FFFBF5;
+  width: 100%;  
+  min-height: 100vh; /* Ensure the container takes at least the full height of the viewport */
+  display: flex;
+  flex-direction: column;
+}
+
+.events-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1; /* Allow content to take up all available space */
+  padding-bottom: 60px; /* Make space for the fixed navbar at the bottom */
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
