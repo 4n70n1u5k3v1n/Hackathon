@@ -47,31 +47,31 @@ const LeaderboardPage = () => {
         {/* Podium for Top 3 */}
         <div className="leaderboardPage-podium">
           {/* 2nd Place */}
-          <div className="home-podiumSecond">
-            <h3 className="home-podiumName">{top3[1]?.user_username}</h3>
-            <p className="home-podiumPoints">{top3[1]?.user_gc} Points</p>
+          <div className="leaderboardPage-podiumSecond">
+            <h3 className="leaderboardPage-podiumName">{top3[1]?.user_username}</h3>
+            <p className="leaderboardPage-podiumPoints">{top3[1]?.user_gc} Points</p>
           </div>
 
           {/* 1st Place */}
-          <div className="home-podiumFirst">
-            <h3 className="home-podiumName">{top3[0]?.user_username}</h3>
-            <p className="home-podiumPoints">{top3[0]?.user_gc} Points</p>
+          <div className="leaderboardPage-podiumFirst">
+            <h3 className="leaderboardPage-podiumName">{top3[0]?.user_username}</h3>
+            <p className="leaderboardPage-podiumPoints">{top3[0]?.user_gc} Points</p>
           </div>
 
           {/* 3rd Place */}
-          <div className="home-podiumThird">
-            <h3 className="home-podiumName">{top3[2]?.user_username}</h3>
-            <p className="home-podiumPoints">{top3[2]?.user_gc} Points</p>
+          <div className="leaderboardPage-podiumThird">
+            <h3 className="leaderboardPage-podiumName">{top3[2]?.user_username}</h3>
+            <p className="leaderboardPage-podiumPoints">{top3[2]?.user_gc} Points</p>
           </div>
         </div>
 
         {/* List of Remaining Users */}
         <div className="leaderboardPage-userList">
           {remainingUsers.map((user, index) => (
-            <div key={user.user_id} className="home-userRow">
-              <span className="home-userRank">{index + 4}.</span>
-              <span className="home-userName">{user.user_username}</span>
-              <span className="home-userPoints">{user.user_gc} Points</span>
+            <div key={user.user_id} className="leaderboardPage-userRow">
+              <span className="leaderboardPage-userRank">{index + 4}.</span>
+              <span className="leaderboardPage-userName">{user.user_username}</span>
+              <span className="leaderboardPage-userPoints">{user.user_gc} Points</span>
             </div>
           ))}
         </div>

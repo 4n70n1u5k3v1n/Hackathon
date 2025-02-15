@@ -16,6 +16,30 @@ const Skills = ({userID}) => {
         'Python', 'JavaScript', 'Java', 'C++', 'C#', 'Ruby', 'Swift', 'Go', 'PHP', 'Kotlin'
     ];
 
+    const initialIncoming = [
+        {
+            id: 4,
+            name: 'User321',
+            profilePic: 'https://via.placeholder.com/50',
+            skillsWant: 'JavaScript',
+            skillsOffered: 'Python',
+        },
+        {
+            id: 5,
+            name: 'User654',
+            profilePic: 'https://via.placeholder.com/50',
+            skillsWant: 'UI/UX Design',
+            skillsOffered: 'Graphic Design',
+        },
+        {
+            id: 6,
+            name: 'User987',
+            profilePic: 'https://via.placeholder.com/50',
+            skillsWant: 'Photography',
+            skillsOffered: 'Video Editing',
+        },
+    ];
+
     // Dummy data for listings
     const initialListings = [
         {
@@ -44,7 +68,7 @@ const Skills = ({userID}) => {
     // State for managing listings, requested, incoming, and accepted
     const [listings, setListings] = useState(initialListings);
     const [requested, setRequested] = useState([]);
-    const [incoming, setIncoming] = useState([]);
+    const [incoming, setIncoming] = useState([initialIncoming]);
     const [accepted, setAccepted] = useState([]);
 
     // State for active tab
