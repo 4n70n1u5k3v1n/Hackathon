@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 
-const Skills = () => {
+const Skills = ({userID}) => {
   // Dummy data for listings
   const initialListings = [
     {

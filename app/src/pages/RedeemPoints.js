@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ChallengesList = () => {
+const ChallengesList = ({userID}) => {
   const challenges = [
     { id: 1, name: 'Challenge 1', points: 100 },
     { id: 2, name: 'Challenge 2', points: 200 },

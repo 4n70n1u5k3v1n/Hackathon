@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 
-const LeaderboardPage = () => {
+const LeaderboardPage = ({userID}) => {
   const users = [
     { id: 1, name: 'User1', points: 5000 },
     { id: 2, name: 'User2', points: 4500 },

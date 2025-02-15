@@ -6,11 +6,12 @@ import Leaderboard from '../components/Leaderboard';
 import Navbar from '../components/Navbar';
 import ProfileSidebar from '../components/ProfileSidebar';
 
-const Home = () => {
+const Home = ({userID}) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleProfileClick = () => {
     setIsSidebarOpen(!isSidebarOpen);
+    console.log('userID:', userID);
   };
 
   return (

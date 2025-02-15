@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import EventList from "../components/EventList";
 import ClientWebCam from "../components/ClientWebCam";
 
-const Events = () => {
+const Events = ({userID}) => {
   return (
     <div>
       <Header />
