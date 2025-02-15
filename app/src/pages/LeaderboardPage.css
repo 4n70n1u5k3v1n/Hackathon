@@ -1,26 +1,29 @@
 /* LeaderboardPage.css */
-.container {
+.home-container {
     position: relative;
     background-color: #FFFBF5;
     width: 100%;  
     height: 100%;
-  }
-  
-  .title {
+    padding-top: 80px; 
+    padding-bottom: 60px;
+}
+
+.home-title {
     margin-bottom: 20px;
     font-size: 1.5rem;
     font-weight: bold;
-  }
-  
-  .podium {
+}
+
+.home-podium {
     display: flex;
     justify-content: center;
     align-items: flex-end;
     gap: 20px;
     margin-bottom: 20px;
-  }
-  
-  .podiumFirst {
+    padding: 2%;
+}
+
+.home-podiumFirst {
     background-color: #ffd700;
     padding: 20px;
     border-radius: 10px;
@@ -30,9 +33,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-  }
-  
-  .podiumSecond {
+}
+
+.home-podiumSecond {
     background-color: #c0c0c0;
     padding: 20px;
     border-radius: 10px;
@@ -42,9 +45,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-  }
-  
-  .podiumThird {
+}
+
+.home-podiumThird {
     background-color: #cd7f32;
     padding: 20px;
     border-radius: 10px;
@@ -54,44 +57,43 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-  }
-  
-  .podiumName {
+}
+
+.home-podiumName {
     margin: 0;
     font-size: 1.2rem;
     font-weight: bold;
-  }
-  
-  .podiumPoints {
+}
+
+.home-podiumPoints {
     margin: 0;
     font-size: 0.9rem;
-  }
-  
-  .userList {
+}
+
+.home-userList {
     display: flex;
     flex-direction: column;
     gap: 10px;
-  }
-  
-  .userRow {
+}
+
+.home-userRow {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #f8f9fa;
     border-radius: 10px;
     padding: 10px;
-  }
-  
-  .userRank {
+}
+
+.home-userRank {
     font-weight: bold;
-  }
-  
-  .userName {
+}
+
+.home-userName {
     flex: 1;
     margin-left: 10px;
-  }
-  
-  .userPoints {
+}
+
+.home-userPoints {
     font-weight: bold;
-  }
-  
+}

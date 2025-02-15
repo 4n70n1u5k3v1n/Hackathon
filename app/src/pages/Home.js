@@ -17,7 +17,7 @@ const Home = ({ userID }) => {
   return (
     <div className="home-container">
       <div
-        className={`blur-overlay ${isSidebarOpen ? 'blur-overlay-active' : ''}`}
+        className={`home-blur-overlay ${isSidebarOpen ? 'home-blur-overlay-active' : ''}`}
       >
         <Header onProfileClick={handleProfileClick} />
         <EventCarousel />
@@ -28,7 +28,7 @@ const Home = ({ userID }) => {
       {isSidebarOpen && (
         <ProfileSidebar
           onClose={() => setIsSidebarOpen(false)}
-          className={isSidebarOpen ? 'profile-sidebar-open' : 'profile-sidebar-closed'}
+          className={isSidebarOpen ? 'home-profile-sidebar-open' : 'home-profile-sidebar-closed'}
         />
       )}
     </div>
