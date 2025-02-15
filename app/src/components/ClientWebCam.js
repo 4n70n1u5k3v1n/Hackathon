@@ -8,8 +8,11 @@ const ClientWebCam = () => {
   const [qrCodeData, setQrCodeData] = useState(null);
   const [isScanning, setIsScanning] = useState(false);
   const canvasRef = useRef(null);
+  const scannedRef = useRef(false); // This ref ensures we only process one QR code
 
   const handleStartWebcam = async () => {
+    // Reset the scanned flag when starting
+    scannedRef.current = false;
     try {
       let constraints = {
         video: {
@@ -41,7 +44,7 @@ const ClientWebCam = () => {
       stream.getTracks().forEach((track) => track.stop());
       setStream(null);
       setIsScanning(false);
-      setQrCodeData(null);
+      scannedRef.current = false; // Reset for next scan session
     }
   };
 
@@ -67,18 +70,19 @@ const ClientWebCam = () => {
         const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
         const code = jsQR(imageData.data, imageData.width, imageData.height);
 
-        if (code) {
+        // Only process the code if it hasn't been processed before
+        if (code && !scannedRef.current) {
+          scannedRef.current = true;
           setQrCodeData(code.data);
           drawLine(context, code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
           drawLine(context, code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
           drawLine(context, code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
           drawLine(context, code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
 
+          // Stop scanning after 1 second
           closeTimeoutId = setTimeout(() => {
             handleStopWebcam();
           }, 1000);
-        } else {
-          setQrCodeData(null);
         }
       }
       animationFrameId = requestAnimationFrame(render);
@@ -102,6 +106,7 @@ const ClientWebCam = () => {
     ctx.stroke();
   };
 
+  console.log("qr-result" + qrCodeData);
   return (
       <div className="webcam-container">
         <button onClick={handleStartWebcam} className="qr-button">
