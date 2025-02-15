@@ -60,9 +60,10 @@ exports.takeAttendance = async (req, res) => {
     try {
         const eventName = await getEventFromToken(eventToken);
         
-        if (eventName) {
+        if (eventName > 0) {
             const eventID = eventName[0].event_id;
             const userAttends = await checkUserRegistration(userId, eventID);
+
             
             if (userAttends) {
                 await editAttendance (userId, eventID);

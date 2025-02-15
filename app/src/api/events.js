@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const BASE_URL = "https://hackathon-lu32dxaw4a-uc.a.run.app/api"; 
-
+// const BASE_URL = "http://localhost:8080/api"; 
 
 export const getAllEvents = async () => {
     try {
@@ -42,9 +42,6 @@ export const registerUserForEvent = async (userId, eventId) => {
 
 export const takeAttendance = async (userId, eventToken) => {
     try {
-        console.log('take attendance api');
-        console.log('userID', userId);
-        console.log('eventtoken', eventToken);
         const response = await axios.get(`${BASE_URL}/takeattendance`, {
             params: { userId, eventToken }
         });

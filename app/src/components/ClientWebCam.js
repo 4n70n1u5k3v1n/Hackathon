@@ -109,8 +109,6 @@ const ClientWebCam = (userID) => {
     ctx.stroke();
   };
 
-  console.log("qr-result" + qrCodeData);
-
   useEffect(() => {
     if (qrCodeData) {
       processQR(qrCodeData);
@@ -118,17 +116,19 @@ const ClientWebCam = (userID) => {
   }, [qrCodeData])
 
   const processQR = async (qrCodeData) => {
-    console.log("Processing QR Code:", qrCodeData);
     const qrCodeDataFormat = qrCodeData.trim();
     try {
       const data = await takeAttendance('1', qrCodeDataFormat);
-      console.log (data.data);
 
+      if (data) {
+        alert('Attendance Successful!');
+      } else {
+        alert('Event attendance failed');
+      }
+      
     } catch (err) {
       console.error ("Error taking attendance frontend:", err);
-      
     }
-    
   }
 
 
