@@ -55,12 +55,12 @@ exports.getEventbyUserID = async (req, res) => {
 }
 
 exports.takeAttendance = async (req, res) => {
-    const {userID, eventToken} = req.body;
+    const {userID, eventToken} = req.query;
     try {
         const eventName = await getEventFromToken(eventToken);
         res.status(201).json(eventName);
     } catch (error) {
         console.error ("Error checking attendance: ", error);
-        res.status(500).json({ success: false, error: "Internall server error." });
-    }
+        res.status(500).json({ success: false, error: "Internall server error." });
+    }
 }
