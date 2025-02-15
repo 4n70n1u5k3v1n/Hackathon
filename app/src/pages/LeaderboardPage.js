@@ -33,7 +33,7 @@ const LeaderboardPage = ({userID}) => {
   const remainingUsers = users.slice(3);
 
   return (
-    <div>
+    <div style={{paddingRight:'20px', marginLeft:'20px', backgroundColor:'#fffbf5'}}>
       <div
         style={{
           filter: isSidebarOpen ? 'blur(5px)' : 'none',

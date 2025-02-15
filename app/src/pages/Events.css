@@ -22,3 +22,122 @@ h2 {
   font-size: 24px;
   margin-bottom: 20px;
 }
+/* Create Event Button */
+.create-event-button {
+  position: fixed;
+  top: 80px; /* Adjust based on header height */
+  right: 20px;
+  background-color: #6c92eb;
+  color: white;
+  border: none;
+  border-radius: 20px; /* Rounded corners */
+  padding: 10px 20px; /* Rectangle shape */
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.create-event-button:hover {
+  background-color: #0056b3;
+}
+
+/* Create Event Pop-up Overlay */
+.create-event-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+}
+
+/* Create Event Pop-up Container */
+.create-event-popup-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative; /* For positioning the close button */
+}
+
+.create-event-popup-container h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Close Button */
+.close-popup-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-popup-button:hover {
+  background-color: #5a6268;
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.form-group textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+/* Submit Button */
+.submit-button {
+  width: 50%; /* Keep the width at 70% */
+  padding: 10px;
+  text-align: center;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 10px;
+  background-color: #6c92eb;
+  color: white;
+  display: block; /* Make it a block-level element */
+  margin-left: auto; /* Auto margin for horizontal centering */
+  margin-right: auto; /* Auto margin for horizontal centering */
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
