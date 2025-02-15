@@ -1,25 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAllItems } from '../api/items'; // Adjust the import path as needed
+import { getAllItems } from '../api/items';
+import { getUserPoints, redeemItem } from '../api/user';
 import './RedeemPoints.css';
 
-const RedeemPoints = () => {
+const RedeemPoints = ({ userID }) => {
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
-    const [points, setPoints] = useState(4900); // You can replace this with a dynamic API call if available
+    const [points, setPoints] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [redeeming, setRedeeming] = useState(false);
 
     useEffect(() => {
+        const fetchUserPoints = async () => {
+            try {
+                const userPoints = await getUserPoints(userID);
+                setPoints(userPoints);
+            } catch (err) {
+                console.error('Error fetching user points:', err);
+                setPoints(0);
+            }
+        };
+
         const fetchProducts = async () => {
             try {
                 const response = await getAllItems();
-                // If your API returns an object like { success: true, data: [...] }
-                // you may need to access response.data; otherwise, adjust accordingly.
                 if (response.success && response.data) {
                     setProducts(response.data);
                 } else {
-                    // Fallback if response is simply the products array
                     setProducts(response);
                 }
             } catch (err) {
@@ -30,17 +39,40 @@ const RedeemPoints = () => {
             }
         };
 
-        fetchProducts().then(r => console.log('Products fetched'));
-    }, []);
+        fetchUserPoints();
+        fetchProducts();
+    }, [userID]);
+
+    const handleRedeem = async (itemID, itemPoints) => {
+        if (points < itemPoints) {
+            alert("Not enough points to redeem this item.");
+            return;
+        }
+
+        setRedeeming(true);
+        try {
+            const response = await redeemItem(userID, itemID);
+
+            if (response.success) {
+                setPoints((prevPoints) => prevPoints - itemPoints);
+                alert("Item successfully redeemed!");
+            } else {
+                alert(response.message || "Failed to redeem item. Please try again.");
+            }
+        } catch (err) {
+            console.error("Error redeeming item:", err);
+            alert("Error processing redemption.");
+        } finally {
+            setRedeeming(false);
+        }
+    };
 
     return (
         <div className="redeemPoints-container">
-            {/* Back Button */}
             <button className="redeemPoints-backButton" onClick={() => navigate(-1)}>
                 &larr; Back
             </button>
 
-            {/* Points Display */}
             <div className="redeemPoints-pointsContainer">
                 <div className="redeemPoints-pointsCard">
                     <h2>{points} Points</h2>
@@ -50,7 +82,6 @@ const RedeemPoints = () => {
                 </div>
             </div>
 
-            {/* Product Listing */}
             <div className="redeemPoints-productList">
                 {loading ? (
                     <p>Loading products...</p>
@@ -66,6 +97,13 @@ const RedeemPoints = () => {
                             />
                             <h3>{product.item_name}</h3>
                             <p>{product.item_gc} Points</p>
+                            <button 
+                                className="redeemPoints-redeemButton"
+                                onClick={() => handleRedeem(product.item_id, product.item_gc)}
+                                disabled={redeeming}
+                            >
+                                {redeeming ? "Redeeming..." : "Redeem"}
+                            </button>
                         </div>
                     ))
                 ) : (

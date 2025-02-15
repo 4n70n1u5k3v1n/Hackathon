@@ -21,3 +21,34 @@ exports.getUserPoints = async (userID) => {
         throw error;
     }
 };
+
+exports.redeemItem = async (userID, itemID) => {
+    try {
+        const [item] = await db.execute(`SELECT item_gc FROM ITEM WHERE item_id = ?`, [itemID]);
+        if (item.length === 0) return { success: false, message: "Item not found." };
+
+        const [user] = await db.execute(`SELECT user_gc FROM USER WHERE user_id = ?`, [userID]);
+        if (user.length === 0) return { success: false, message: "User not found." };
+
+        if (user[0].user_gc < item[0].item_gc) return { success: false, message: "Insufficient points." };
+
+        await db.execute(`UPDATE USER SET user_gc = user_gc - ? WHERE user_id = ?`, [item[0].item_gc, userID]);
+        await db.execute(`INSERT INTO USER_REDEMPTION (user_id, item_id, quantity, redemption_date) VALUES (?, ?, 1, NOW())`, [userID, itemID]);
+
+        return { success: true, message: "Item redeemed successfully." };
+    } catch (error) {
+        throw error;
+    }
+};
+
+exports.updatePoints = async (userId, ptIncrease) => {
+    try {
+        const query = 'UPDATE USER SET user_gc = user_gc + ? WHERE user_id = ?';
+        await db.execute(query, [userId, ptIncrease]);
+        console.log('Points update success');
+        return { success: true, message: "User's points have been added successfully" };
+    } catch (error) {
+        console.error("Error updating points", error);
+        throw error;
+    }
+};

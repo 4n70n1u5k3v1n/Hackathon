@@ -30,3 +30,14 @@ exports.getLeaderboard = async (req, res) => {
         res.status(500).json({ success: false, error: "Internal server error." });
     }
 };
+
+exports.redeemItem = async(req, res) => {
+    try{
+        const {userID, itemID } = req.body;
+        const result = await this.redeemItem(userID, itemID);
+        res.status(200).json(result);
+    }
+    catch(error){
+        res.status(500).json({success: false, error: "Internal server error."});
+    }
+}
