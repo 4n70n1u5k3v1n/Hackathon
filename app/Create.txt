@@ -115,3 +115,12 @@ CREATE TABLE USER_SKILL_WANT (
     FOREIGN KEY (user_id) REFERENCES USER(user_id),
     FOREIGN KEY (skills_id) REFERENCES SKILLS(skill_id)
 );
+
+CREATE TABLE USER_RECOMMENDATIONS (
+    user_id INT NOT NULL,
+    event_id INT NOT NULL,
+    score DECIMAL(5,2) NOT NULL,
+    PRIMARY KEY (user_id, event_id),
+    FOREIGN KEY (user_id) REFERENCES USER(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (event_id) REFERENCES EVENT(event_id) ON DELETE CASCADE
+);
