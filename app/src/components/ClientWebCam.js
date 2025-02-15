@@ -2,11 +2,13 @@ import React, { useState, useRef, useEffect } from "react";
 import jsQR from "jsqr";
 import qrlogo from "./qrlogo.svg";
 import "./ClientWebCam.css"; // Import CSS
+import { takeAttendance } from "../api/events";
 
-const ClientWebCam = () => {
+const ClientWebCam = (userID) => {
   const [stream, setStream] = useState(null);
   const [qrCodeData, setQrCodeData] = useState(null);
   const [isScanning, setIsScanning] = useState(false);
+  const [error, setError] = useState ('');
   const canvasRef = useRef(null);
   const scannedRef = useRef(false); // This ref ensures we only process one QR code
 
@@ -95,6 +97,7 @@ const ClientWebCam = () => {
       clearTimeout(closeTimeoutId);
       stream.getTracks().forEach((track) => track.stop());
     };
+
   }, [stream]);
 
   const drawLine = (ctx, begin, end, color) => {
@@ -107,6 +110,28 @@ const ClientWebCam = () => {
   };
 
   console.log("qr-result" + qrCodeData);
+
+  useEffect(() => {
+    if (qrCodeData) {
+      processQR(qrCodeData);
+    }
+  }, [qrCodeData])
+
+  const processQR = async (qrCodeData) => {
+    console.log("Processing QR Code:", qrCodeData);
+    const qrCodeDataFormat = qrCodeData.trim();
+    try {
+      const data = await takeAttendance('1', qrCodeDataFormat);
+      console.log (data.data);
+
+    } catch (err) {
+      console.error ("Error taking attendance frontend:", err);
+      
+    }
+    
+  }
+
+
   return (
       <div className="webcam-container">
         <button onClick={handleStartWebcam} className="qr-button">
@@ -125,7 +150,6 @@ const ClientWebCam = () => {
         {qrCodeData && (
             <div className="qr-result">
               <h2>QR Code Detected:</h2>
-              <p>{qrCodeData}</p>
             </div>
         )}
       </div>

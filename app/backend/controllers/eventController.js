@@ -50,6 +50,17 @@ exports.getEventbyUserID = async (req, res) => {
         res.status(201).json(result);
     } catch (error) {
         console.error ("Error getting event:", error);
-        res.status(500).jsonn({ success: false, error: "Internal server error." });
+        res.status(500).json({ success: false, error: "Internal server error." });
     }
+}
+
+exports.takeAttendance = async (req, res) => {
+    const {userID, eventToken} = req.query;
+    try {
+        const eventName = await getEventFromToken(eventToken);
+        res.status(201).json(eventName);
+    } catch (error) {
+        console.error ("Error checking attendance: ", error);
+        res.status(500).json({ success: false, error: "Internall server error." });
+    }
 }

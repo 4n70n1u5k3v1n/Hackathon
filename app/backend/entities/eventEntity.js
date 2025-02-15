@@ -12,7 +12,7 @@ exports.fetchAllEvents = async () => {
 
 exports.checkUserRegistration = async (userId, eventId) => {
     try {
-        const query = `SELECT * FROM USER_EVENT WHERE user_id = ? AND event_id = ?`;
+        const query = 'SELECT * FROM USER_EVENT WHERE user_id = ? AND event_id = ?';
         const [results] = await db.execute(query, [userId, eventId]);
         return results.length > 0;  // Returns true if the user is registered
     } catch (error) {
@@ -23,7 +23,7 @@ exports.checkUserRegistration = async (userId, eventId) => {
 
 exports.registerUserForEvent = async (userId, eventId) => {
     try {
-        const query = `INSERT INTO USER_EVENT (user_id, event_id, status) VALUES (?, ?, 'upcoming')`;
+        const query = 'INSERT INTO USER_EVENT (user_id, event_id, status) VALUES (?, ?, "upcoming")';
         await db.execute(query, [userId, eventId]);
         return { success: true, message: "User registered successfully" };
     } catch (error) {
@@ -34,7 +34,7 @@ exports.registerUserForEvent = async (userId, eventId) => {
 
 exports.getEventFromToken = async (eventToken) => {
     try {
-        const query = `SELECT * FROM EVENT WHERE event_qr = ?`;
+        const query = 'SELECT * FROM EVENT WHERE event_qr = ?';
         const [events] = await db.execute(query, [eventToken]);
         return events;
     } catch (error) {
@@ -44,7 +44,7 @@ exports.getEventFromToken = async (eventToken) => {
 
 exports.getEventByUserID = async (userID) => {
     try {
-        const query = `SELECT * FROM USER_EVENT WHERE user_id = ?`;
+        const query = 'SELECT * FROM USER_EVENT WHERE user_id = ?';
         const [events] = await db.execute(query, [userID]);
         return events;
     } catch (error) {
