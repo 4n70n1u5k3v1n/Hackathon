@@ -1,6 +1,7 @@
 import React from 'react';
+import './RedeemPoints.css'; // Import the CSS file
 
-const ChallengesList = ({userID}) => {
+const RedeemPoints = ({ userID }) => {
   const challenges = [
     { id: 1, name: 'Challenge 1', points: 100 },
     { id: 2, name: 'Challenge 2', points: 200 },
@@ -8,10 +9,10 @@ const ChallengesList = ({userID}) => {
   ];
 
   return (
-    <div style={styles.container}>
-      <h2>Available Challenges</h2>
+    <div className="redeemPoints-container">
+      <h2 className="redeemPoints-title">Available Challenges</h2>
       {challenges.map((challenge) => (
-        <div key={challenge.id} style={styles.challengeCard}>
+        <div key={challenge.id} className="redeemPoints-card">
           <h3>{challenge.name}</h3>
           <p>{challenge.points} Points</p>
         </div>
@@ -20,16 +21,4 @@ const ChallengesList = ({userID}) => {
   );
 };
 
-const styles = {
-  container: {
-    margin: '20px',
-  },
-  challengeCard: {
-    backgroundColor: '#e9ecef',
-    padding: '10px',
-    borderRadius: '5px',
-    marginBottom: '10px',
-  },
-};
-
-export default ChallengesList;
+export default RedeemPoints;

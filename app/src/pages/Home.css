@@ -6,30 +6,31 @@
     min-height: 100vh; /* Ensure the container takes at least the full height of the viewport */
     display: flex;
     flex-direction: column;
-  }
-  
-  .blur-overlay {
+    padding-top: 80px; 
+    padding-bottom: 60px;
+}
+
+.home-blur-overlay {
     transition: filter 0.3s ease, opacity 0.3s ease, pointer-events 0.3s ease;
-  }
-  
-  .profile-sidebar-open {
+}
+
+.home-profile-sidebar-open {
     left: 0;
-  }
-  
-  .profile-sidebar-closed {
+}
+
+.home-profile-sidebar-closed {
     left: -50%;
-  }
-  
-  .home-content {
+}
+
+.home-content {
     display: flex;
     flex-direction: column;
     gap: 20px;
     flex: 1; /* Allow content to take up all available space */
     padding-bottom: 60px; /* Make space for the fixed navbar at the bottom */
-  }
-  
-  h2 {
+}
+
+h2 {
     font-size: 24px;
     margin-bottom: 20px;
-  }
-  
+}

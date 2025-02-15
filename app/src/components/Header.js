@@ -17,8 +17,9 @@ const styles = {
     alignItems: 'center',
     padding: '10px',
     backgroundColor: '#AD2831',
-    position: 'sticky',
+    position: 'fixed',
     top: 0,
+    width: '100%',
     zIndex: 1000,
   },
   profileCircle: {
@@ -34,6 +35,7 @@ const styles = {
   },
   points: {
     fontSize: '1rem',
+    paddingRight: '12px',
   },
 };
 

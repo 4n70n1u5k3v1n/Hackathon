@@ -1,8 +1,9 @@
 import React from 'react';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
+import './Missions.css'; // Import the CSS file
 
-const Missions = ({userID}) => {
+const Missions = ({ userID }) => {
   const challenges = [
     { id: 1, name: 'Join an Event', progress: '0/1', points: 100 },
     { id: 2, name: 'Make a New Friend', progress: '0/1', points: 200 },
@@ -12,10 +13,10 @@ const Missions = ({userID}) => {
   return (
     <div>
       <Header />
-      <div style={styles.container}>
-        <h2 style={styles.title}>Challenges</h2>
+      <div className="mission-container">
+        <h2 className="mission-title">Challenges</h2>
         {challenges.map((challenge) => (
-          <div key={challenge.id} style={styles.challengeCard}>
+          <div key={challenge.id} className="mission-card">
             <h3>{challenge.name}</h3>
             <p>
               {challenge.progress} - {challenge.points} Points
@@ -26,21 +27,6 @@ const Missions = ({userID}) => {
       <Navbar />
     </div>
   );
-};
-
-const styles = {
-  container: {
-    padding: '20px',
-  },
-  title: {
-    marginBottom: '20px',
-  },
-  challengeCard: {
-    backgroundColor: '#f8f9fa',
-    borderRadius: '10px',
-    padding: '15px',
-    marginBottom: '10px',
-  },
 };
 
 export default Missions;

@@ -18,39 +18,39 @@ const LeaderboardPage = ({ userID }) => {
   const remainingUsers = users.slice(3); // Remaining users for the list
 
   return (
-    <div className="container">
+    <div className="home-container">
       <Header />
       <div>
-        <h2 className="title">Leaderboard</h2>
+        <h2 className="home-title">Leaderboard</h2>
 
         {/* Podium for Top 3 */}
-        <div className="podium">
+        <div className="home-podium">
           {/* 2nd Place */}
-          <div className="podiumSecond">
-            <h3 className="podiumName">{top3[1].name}</h3>
-            <p className="podiumPoints">{top3[1].points} Points</p>
+          <div className="home-podiumSecond">
+            <h3 className="home-podiumName">{top3[1].name}</h3>
+            <p className="home-podiumPoints">{top3[1].points} Points</p>
           </div>
 
           {/* 1st Place */}
-          <div className="podiumFirst">
-            <h3 className="podiumName">{top3[0].name}</h3>
-            <p className="podiumPoints">{top3[0].points} Points</p>
+          <div className="home-podiumFirst">
+            <h3 className="home-podiumName">{top3[0].name}</h3>
+            <p className="home-podiumPoints">{top3[0].points} Points</p>
           </div>
 
           {/* 3rd Place */}
-          <div className="podiumThird">
-            <h3 className="podiumName">{top3[2].name}</h3>
-            <p className="podiumPoints">{top3[2].points} Points</p>
+          <div className="home-podiumThird">
+            <h3 className="home-podiumName">{top3[2].name}</h3>
+            <p className="home-podiumPoints">{top3[2].points} Points</p>
           </div>
         </div>
 
         {/* List of Remaining Users */}
-        <div className="userList">
+        <div className="home-userList">
           {remainingUsers.map((user, index) => (
-            <div key={user.id} className="userRow">
-              <span className="userRank">{index + 4}.</span>
-              <span className="userName">{user.name}</span>
-              <span className="userPoints">{user.points} Points</span>
+            <div key={user.id} className="home-userRow">
+              <span className="home-userRank">{index + 4}.</span>
+              <span className="home-userName">{user.name}</span>
+              <span className="home-userPoints">{user.points} Points</span>
             </div>
           ))}
         </div>

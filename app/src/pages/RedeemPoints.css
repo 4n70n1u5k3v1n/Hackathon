@@ -1,0 +1,31 @@
+/* RedeemPoints.css */
+
+.redeemPoints-container {
+    position: relative;
+    background-color: #FFFBF5;
+    width: 100%;  
+    min-height: 100vh; /* Ensure the container takes at least the full height of the viewport */
+    display: flex;
+    flex-direction: column;
+    padding-top: 80px; 
+    padding-bottom: 60px;
+  }
+  
+  .redeemPoints-title {
+    margin-bottom: 20px;
+  }
+  
+  .redeemPoints-card {
+    background-color: #e9ecef;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .redeemPoints-button {
+    font-size: 18px;
+    font-weight: bold;
+    color: #28a745; /* Green color */
+    margin-top: 20px;
+  }
+  
