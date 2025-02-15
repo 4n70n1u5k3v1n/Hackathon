@@ -26,8 +26,14 @@ const LeaderboardPage = ({userID}) => {
   }, []);
 
   if (users.length === 0) {
-    return <p>Loading leaderboard...</p>;
-  }
+    return (
+      <div>
+        <Header onProfileClick={handleProfileClick} userID={userID}/>
+        <p style={{paddingTop:'15%', marginLeft: '5%'}}>Loading leaderboard...</p>
+        <Navbar />
+      </div>
+    );
+  };
 
   const top3 = users.slice(0, 3);
   const remainingUsers = users.slice(3);
