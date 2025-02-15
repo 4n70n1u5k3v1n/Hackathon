@@ -3,8 +3,16 @@ import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Swal from 'sweetalert2';
 import './Skills.css';  // Import the CSS file
+import ProfileSidebar from '../components/ProfileSidebar';
+
 
 const Skills = ({userID}) => {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    
+    const handleProfileClick = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+    };
+
     const programmingLanguages = [
         'Python', 'JavaScript', 'Java', 'C++', 'C#', 'Ruby', 'Swift', 'Go', 'PHP', 'Kotlin'
     ];

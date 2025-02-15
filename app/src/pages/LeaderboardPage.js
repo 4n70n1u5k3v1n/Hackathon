@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
+import ProfileSidebar from '../components/ProfileSidebar';
 import "./LeaderboardPage.css"; // Import the CSS file
 
-const LeaderboardPage = ({ userID }) => {
+const LeaderboardPage = ({userID}) => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  
+  const handleProfileClick = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+
   const users = [
     { id: 1, name: 'User1', points: 5000 },
     { id: 2, name: 'User2', points: 4500 },
@@ -19,10 +27,16 @@ const LeaderboardPage = ({ userID }) => {
 
   return (
     <div className="home-container">
-      <Header />
+      <div
+        style={{
+          filter: isSidebarOpen ? 'blur(5px)' : 'none',
+          opacity: isSidebarOpen ? 0.5 : 1,
+          pointerEvents: isSidebarOpen ? 'none' : 'auto',
+        }}
+      >
+      <Header onProfileClick={handleProfileClick}/>
       <div>
         <h2 className="home-title">Leaderboard</h2>
-
         {/* Podium for Top 3 */}
         <div className="home-podium">
           {/* 2nd Place */}
@@ -55,7 +69,9 @@ const LeaderboardPage = ({ userID }) => {
           ))}
         </div>
       </div>
+      </div>
       <Navbar />
+      {isSidebarOpen && (<ProfileSidebar onClose={() => setIsSidebarOpen(false)} style={{ left: isSidebarOpen ? '0' : '-50%' }} />)}
     </div>
   );
 };

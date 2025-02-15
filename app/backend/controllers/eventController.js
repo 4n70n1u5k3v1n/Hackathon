@@ -1,4 +1,4 @@
-const { fetchAllEvents, checkUserRegistration, registerUserForEvent } = require("../entities/eventEntity");
+const { fetchAllEvents, checkUserRegistration, registerUserForEvent, getEventFromToken, getEventByUserID } = require("../entities/eventEntity");
 
 exports.getAllEvents = async (req, res) => {
     try {
@@ -31,3 +31,25 @@ exports.registerForEvent = async (req, res) => {
         res.status(500).json({ success: false, error: "Internal server error." });
     }
 };
+
+exports.getEventbyToken = async (req, res) => {
+    const { eventToken } = req.body;
+    try {
+        const result = await getEventFromToken(eventToken);
+        res.status(201).json(result);
+    } catch (error) {
+        console.error("Error getting event:", error);
+        res.status(500).json({ success: false, error: "Internal server error." });
+    }
+}
+
+exports.getEventbyUserID = async (req, res) => {
+    const {userID} = req.body;
+    try{
+        const result = await getEventByUserID(userID);
+        res.status(201).json(result);
+    } catch (error) {
+        console.error ("Error getting event:", error);
+        res.status(500).jsonn({ success: false, error: "Internal server error." });
+    }
+}
