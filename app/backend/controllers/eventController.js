@@ -1,6 +1,6 @@
-const { fetchAllEvents, checkUserRegistration, registerUserForEvent, getEventFromToken, getEventByUserID, editAttendance, unregisterUserFromEvent } = require("../entities/eventEntity");
+const { fetchAllEvents, checkUserRegistration, registerUserForEvent, getEventFromToken, getEventByUserID, editAttendance } = require("../entities/eventEntity");
 const { updatePoints } = require ("../entities/userEntity");
-const { completeChallenge, withdrawChallenge } = require ("../entities/challengeEntity");
+// const { completeChallenge } = require ("../entities/challengeEntity");
 
 exports.getAllEvents = async (req, res) => {
     try {
@@ -34,33 +34,6 @@ exports.registerForEvent = async (req, res) => {
     }
 };
 
-exports.unregisterFromEvent = async (req, res) => {
-    const { userId, eventId } = req.body;
-
-    if (!userId || !eventId) {
-        return res.status(400).json({ success: false, message: "Missing userId or eventId." });
-    }
-
-    try {
-        // Check if the user is registered for the event
-        const isRegistered = await checkUserRegistration(userId, eventId);
-
-        if (!isRegistered) {
-            return res.status(404).json({ success: false, message: "User is not registered for this event." });
-        }
-
-        // Unregister the user from the event
-        const result = await unregisterUserFromEvent(userId, eventId);
-
-        res.status(200).json({ success: true, message: "User successfully unregistered from the event." });
-    } catch (error) {
-        console.error("Error unregistering from event:", error);
-        res.status(500).json({ success: false, error: "Internal server error." });
-    }
-};
-
-
-
 exports.getEventbyToken = async (req, res) => {
     const { eventToken } = req.body;
     try {
@@ -87,7 +60,6 @@ exports.takeAttendance = async (req, res) => {
     const {userId, eventToken} = req.query;
     try {
         const event = await getEventFromToken(eventToken);
-        await withdrawChallenge(userId, '1');
         
         if (event.length > 0) {
             const eventID = event[0].event_id;
@@ -101,8 +73,7 @@ exports.takeAttendance = async (req, res) => {
                 console.log ("edit attendance done");
                 await updatePoints (userId, 500);
                 console.log ("update points done");
-                await completeChallenge (userId, '1');  // complete join event mission
-                console.log ("challenge completed");
+                // await completeChallenge (userId, '1');  // complete join event mission
             }
             return res.status(201).json({
                 success: userAttends,

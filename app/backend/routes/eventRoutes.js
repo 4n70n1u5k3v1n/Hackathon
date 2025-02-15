@@ -7,6 +7,6 @@ router.get("/events", getAllEvents);
 router.get("/check", getUserEventStatus);
 router.get("/takeattendance", takeAttendance);
 router.post("/register", registerForEvent);
-router.post("/unregister", unregisterFromEvent);
+// router.post("/unregister", unregisterFromEvent);
 
 module.exports = router;

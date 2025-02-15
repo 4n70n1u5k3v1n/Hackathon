@@ -1,4 +1,4 @@
-const {getUserSkillsListings, getUserSkillsRequested, getUserSkillsOffered, getUserSkillsAccepted} = require('../entities/skillEntity');
+const {getUserSkillsListings, getUserSkillsRequested, getUserSkillsOffered, getUserSkillsAccepted, acceptSkillMatchStatus, rejectSkillMatchStatus, requestSkillMatch} = require('../entities/skillEntity');
 
 exports.getUserSkillsListing = async(req, res) => {
     try{
@@ -44,3 +44,33 @@ exports.getUserSkillsAccepted = async(req, res) => {
         res.status(500).json({success: false, error: "Internal server error."});
     }
 }
+
+exports.acceptSkillMatchStatus = async (req, res) => {
+    try {
+        const {requestorId, acceptorId, status} = req.body;
+        const result = await acceptSkillMatchStatus(requestorId, acceptorId, status);
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error." });
+    }
+};
+
+exports.rejectSkillMatchStatus = async (req, res) => {
+    try {
+        const {requestorId, acceptorId} = req.body;
+        const result = await rejectSkillMatchStatus(requestorId, acceptorId);
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error." });
+    }
+};
+
+exports.requestSkillMatch = async (req, res) => {
+    try {
+        const {acceptorId, requestorId, skillId, skillId2} = req.body;
+        const result = await requestSkillMatch(acceptorId, requestorId, skillId, skillId2);
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error." });
+    }
+};

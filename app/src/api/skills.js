@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "https://hackathon-lu32dxaw4a-uc.a.run.app/api";
-//const BASE_URL = "http://localhost:8080/api";
+// const BASE_URL = "https://hackathon-lu32dxaw4a-uc.a.run.app/api";
+const BASE_URL = "http://localhost:8080/api";
 
 export const getUserSkillsListings = async (userID) => {
     try {
@@ -53,3 +53,46 @@ export const getUserSkillsAccepted = async (userID) => {
         throw error;
     }
 };
+
+export const acceptSkillMatchStatus = async (requestorId, acceptorId, status) => {
+    try {
+        const response = await axios.post(`${BASE_URL}/accept-skill-match-status`, {
+            requestorId,
+            acceptorId,
+            status
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error("Error updating skill match status:", error);
+        return { success: false, message: "Error updating skill match status." };
+    }
+}
+
+export const rejectSkillMatchStatus = async (requestorId, acceptorId) => {
+    try {
+        const response = await axios.post(`${BASE_URL}/reject-skill-match-status`, {
+            requestorId,
+            acceptorId
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error("Error rejecting skill match status:", error);
+        return { success: false, message: "Error rejecting skill match status." };
+    }
+}
+
+export const requestSkillMatchStatus = async (requestorId, acceptorId) => {
+    try {
+        const response = await axios.post(`${BASE_URL}/request-skill-match`, {
+            requestorId,
+            acceptorId
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error("Error cancelling skill match status:", error);
+        return { success: false, message: "Error cancelling skill match status." };
+    }
+}

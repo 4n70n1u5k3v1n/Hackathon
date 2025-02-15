@@ -10,6 +10,8 @@ import {
     getUserSkillsOffered,
     getUserSkillsAccepted
 } from '../api/skills';
+import axios from "axios";
+const BASE_URL = "http://localhost:8080/api";
 
 const Skills = ({ userID }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -72,23 +74,55 @@ const Skills = ({ userID }) => {
 
     // Handle request for a skill
     const handleRequest = async (user) => {
-        setRequested([...requested, user]);
-        setListings(listings.filter((listing) => listing.id !== user.id));
-    };
-
-    // Cancel a request
-    const handleCancelRequest = (user) => {
-        setListings([...listings, user]);
-        setRequested(requested.filter((req) => req.id !== user.id));
-    };
-
-    // Handle incoming request (accept or reject)
-    const handleIncomingRequest = (user, action) => {
-        if (action === 'accept') {
-            setAccepted([...accepted, user]);
+        console.log(userID);
+        try {
+            await axios.post(`${BASE_URL}/request-skill-match`, {
+                acceptorId: userID,
+                requestorId: user.requestor_id,
+                skillId: user.skills_id,
+                skillId2: user.skills_id_2
+            });
+            setListings(listings.filter((listing) => listing.id !== user.id));
+        } catch (error) {
+            console.error("Error sending request:", error);
         }
-        setIncoming(incoming.filter((req) => req.id !== user.id));
     };
+
+    const handleCancelRequest = async (user) => {
+        try {
+            await axios.post(`${BASE_URL}/reject-skill-match-status`, {
+                requestorId: user.requestor_id,
+                acceptorId: user.acceptor_id
+            });
+            setRequested(requested.filter((req) => req.id !== user.id));
+        } catch (error) {
+            console.error("Error canceling request:", error);
+        }
+    };
+
+    const handleIncomingRequest = async (user, action) => {
+        try {
+            if (action === "accept") {
+                await axios.post(`${BASE_URL}/accept-skill-match-status`, {
+                    requestorId: user.requestor_id,
+                    acceptorId: user.acceptor_id,
+                    status: "accepted"
+                });
+
+                setAccepted([...accepted, user]);
+            } else if (action === "reject") {
+                await axios.post(`${BASE_URL}/reject-skill-match-status`, {
+                    requestorId: user.requestor_id,
+                    acceptorId: user.acceptor_id
+                });
+            }
+
+            setIncoming(incoming.filter((req) => req.id !== user.id));
+        } catch (error) {
+            console.error(`Error ${action}ing request:`, error);
+        }
+    };
+
 
     // Handle form submission for creating a listing
     const handleSubmit = async () => {
