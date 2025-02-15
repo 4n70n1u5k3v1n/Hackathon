@@ -2,16 +2,17 @@
 .carousel-container {
     margin: 15px auto;         /* auto centers the container horizontally */
     padding: 20px;             /* increased padding for spacing */
-    background-color: #f8f9fa;   /* light background color */
+    background-color: #fffbf5;   /* light background color */
     border-radius: 15px;       /* rounded corners */
-    max-width: 800px;          /* constrains the width */
+    max-width: 370px;          /* constrains the width */
     text-align: center;        /* center content inside the container */
-    overflow: hidden;          /* hide any overlapping content */
+    overflow: hidden;   
+    padding-top: 50px;       /* hide any overlapping content */
 }
 
 /* Each event card with its own rounded square background */
 .event-card {
-    background-color: #ece3e3;
+    background-color: #e9e9e9;
     padding: 15px;             /* added padding so content isn't flush to the edges */
     border-radius: 20px;
     text-align: left;
