@@ -22,7 +22,7 @@ const Header = ({ onProfileClick, userID }) => {
   return (
     <header style={styles.header}>
      <FaUserCircle style={styles.profileIcon} onClick={onProfileClick} />
-      <h1 style={styles.title}>GeekSpand</h1>
+      <h1 style={styles.title}><span style={{color: '#6C92EB'}}>Ge</span>ek<span style={{color: '#4C956C'}}>Sp</span>a<span style={{color: '#FCBC08'}}>nd</span></h1>
       <div style={styles.points}>{points} Points</div>
     </header>
   );

@@ -237,6 +237,10 @@ const Skills = ({ userID }) => {
                                 <option value="">Select a skill you want</option>
                                 {programmingLanguages.map(lang => <option key={lang} value={lang}>{lang}</option>)}
                             </select>
+                            <select value={skillsOffered} onChange={(e) => setSkillsOffered(e.target.value)} className="skills-input">
+                                <option value="">Select a skill you can offer</option>
+                                {programmingLanguages.map(lang => <option key={lang} value={lang}>{lang}</option>)}
+                            </select>
                             <button className="skills-submitButton" onClick={handleSubmit}>Enter</button>
                             <button className="skills-closeButton" onClick={() => setShowPopup(false)}>Close</button>
                         </div>
