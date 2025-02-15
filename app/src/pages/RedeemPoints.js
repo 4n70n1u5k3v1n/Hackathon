@@ -70,7 +70,7 @@ const RedeemPoints = ({ userID }) => {
     return (
         <div className="redeemPoints-container">
             <button className="redeemPoints-backButton" onClick={() => navigate(-1)}>
-                &larr; Back
+                Back
             </button>
 
             <div className="redeemPoints-pointsContainer">
@@ -78,7 +78,7 @@ const RedeemPoints = ({ userID }) => {
                     <h2>{points} Points</h2>
                 </div>
                 <div className="redeemPoints-warningCard">
-                    <p>Your points will expire on 31 Dec 2025 23:59 SGT</p>
+                    <p>⚠️points will expire on 31 Dec 2025 23:59 SGT</p>
                 </div>
             </div>
 

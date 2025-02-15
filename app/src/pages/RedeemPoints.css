@@ -1,54 +1,66 @@
 .redeemPoints-container {
     padding: 20px;
+    background-color: #fffbf5;
   }
   
   .redeemPoints-backButton {
-    background-color: transparent;
+    background-color: #fcbc08;
     border: none;
-    font-size: 1rem;
+    border-radius: 20px;
+    font-size: 16px;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    position: sticky;
+    padding: 7px;
+    color: #ffffff;
   }
   
   .redeemPoints-pointsContainer {
     position: sticky;
     top: 0;
-    background-color: #fff;
+    background-color: #fffbf5;
     z-index: 1000;
     padding-bottom: 10px;
+    border: none;
+    outline: none;
+    box-shadow: none;
   }
   
   .redeemPoints-pointsCard {
-    background-color: #e9ecef;
+    background-color: #ad2831;
     border-radius: 10px;
     padding: 20px;
     text-align: center;
     margin-bottom: 10px;
+    color: #fffbf5;
+    border: none;
+    
   }
   
   .redeemPoints-warningCard {
     background-color: #fff3cd;
     border-radius: 10px;
-    padding: 10px;
+    padding: 1px;
     text-align: center;
     color: #856404;
   }
   
   .redeemPoints-productList {
-    margin-top: 20px;
+    margin-top: 10px;
   }
   
   .redeemPoints-productCard {
-    background-color: #f8f9fa;
+    background-color: #ffffff;
     border-radius: 10px;
-    padding: 20px;
+    padding: 10px;
+    padding-bottom: 20px;
     margin-bottom: 20px;
     text-align: center;
   }
   
   .redeemPoints-productImage {
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
     object-fit: cover;
     border-radius: 10px;
   }

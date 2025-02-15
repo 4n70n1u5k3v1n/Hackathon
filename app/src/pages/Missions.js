@@ -13,8 +13,8 @@ const Missions = ({userID}) => {
 
   const challenges = [
     { id: 1, name: 'Join an Event', progress: '0/1', points: 100 },
-    { id: 2, name: 'Make a New Friend', progress: '0/1', points: 200 },
-    { id: 3, name: 'Complete a Skill Challenge', progress: '0/1', points: 300 },
+    { id: 2, name: 'Create an Event', progress: '0/1', points: 200 },
+    { id: 3, name: 'Exchange Skills with Another User', progress: '0/1', points: 300 },
   ];
 
   return (
