@@ -88,14 +88,15 @@ CREATE TABLE ITEM (
 );
 
 CREATE TABLE USER_REDEMPTION (
+    REDEMPTION_ID INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     item_id INT,
     quantity INT,
     redemption_date DATETIME,
-    PRIMARY KEY (user_id, item_id),
     FOREIGN KEY (user_id) REFERENCES USER(user_id),
     FOREIGN KEY (item_id) REFERENCES ITEM(item_id)
 );
+
 
 CREATE TABLE SKILLS (
     skill_id INT PRIMARY KEY,

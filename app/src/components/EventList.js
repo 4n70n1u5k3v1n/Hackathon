@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getAllEvents, checkUserEvent, registerUserForEvent } from "../api/events";
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const EventList = ({ userId }) => {
     const [events, setEvents] = useState([]);
@@ -69,7 +70,7 @@ const EventList = ({ userId }) => {
     };
 
     if (loading) {
-        return <p>Loading events...</p>;
+        return <LoadingSpinner />;
     }
 
     if (error) {
