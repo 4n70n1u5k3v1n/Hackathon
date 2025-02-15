@@ -67,6 +67,7 @@ const EventList = ({ userId }) => {
                         <strong>{event.event_name}</strong>
                         <p>{event.event_date} at {event.event_time}</p>
                         <p>Location: {event.event_location}</p>
+                        <p>Description: {event.description}</p>
                     </li>
                 ))}
             </ul>
