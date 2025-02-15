@@ -1,31 +1,55 @@
-/* RedeemPoints.css */
-
 .redeemPoints-container {
-    position: relative;
-    background-color: #FFFBF5;
-    width: 100%;  
-    min-height: 100vh; /* Ensure the container takes at least the full height of the viewport */
-    display: flex;
-    flex-direction: column;
-    padding-top: 80px; 
-    padding-bottom: 60px;
+    padding: 20px;
   }
   
-  .redeemPoints-title {
+  .redeemPoints-backButton {
+    background-color: transparent;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
     margin-bottom: 20px;
   }
   
-  .redeemPoints-card {
+  .redeemPoints-pointsContainer {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 1000;
+    padding-bottom: 10px;
+  }
+  
+  .redeemPoints-pointsCard {
     background-color: #e9ecef;
-    padding: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
     margin-bottom: 10px;
   }
   
-  .redeemPoints-button {
-    font-size: 18px;
-    font-weight: bold;
-    color: #28a745; /* Green color */
+  .redeemPoints-warningCard {
+    background-color: #fff3cd;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    color: #856404;
+  }
+  
+  .redeemPoints-productList {
     margin-top: 20px;
+  }
+  
+  .redeemPoints-productCard {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .redeemPoints-productImage {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
   }
   
