@@ -20,3 +20,9 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     max-width: 90%;            /* keeps event cards from stretching too wide */
 }
+
+.event-card-link {
+    text-decoration: none;  /* Removes the underline */
+    color: inherit;         /* Inherits text color from parent */
+    display: block;         /* Makes the entire card clickable */
+}
