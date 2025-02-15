@@ -2,9 +2,16 @@ import React, { useState } from 'react';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Swal from 'sweetalert2';
+import ProfileSidebar from '../components/ProfileSidebar';
 
 
 const Skills = ({userID}) => {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    
+    const handleProfileClick = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+    };
+
     const programmingLanguages = [
         'Python', 'JavaScript', 'Java', 'C++', 'C#', 'Ruby', 'Swift', 'Go', 'PHP', 'Kotlin'
       ];
@@ -108,7 +115,14 @@ const Skills = ({userID}) => {
 
   return (
     <div>
-      <Header />
+        <div
+        style={{
+            filter: isSidebarOpen ? 'blur(5px)' : 'none',
+            opacity: isSidebarOpen ? 0.5 : 1,
+            pointerEvents: isSidebarOpen ? 'none' : 'auto',
+        }}
+      >
+      <Header onProfileClick={handleProfileClick}/>
       <div style={styles.container}>
         <h2 style={styles.title}>Skills Exchange</h2>
 
@@ -265,8 +279,9 @@ const Skills = ({userID}) => {
           </div>
         </div>
       )}
-
+        </div>
       <Navbar />
+      {isSidebarOpen && (<ProfileSidebar onClose={() => setIsSidebarOpen(false)} style={{ left: isSidebarOpen ? '0' : '-50%' }} />)}
     </div>
   );
 };

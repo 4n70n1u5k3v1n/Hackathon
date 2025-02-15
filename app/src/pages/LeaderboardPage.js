@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
+import ProfileSidebar from '../components/ProfileSidebar';
 
 const LeaderboardPage = ({userID}) => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  
+  const handleProfileClick = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   const users = [
     { id: 1, name: 'User1', points: 5000 },
     { id: 2, name: 'User2', points: 4500 },
@@ -18,7 +25,14 @@ const LeaderboardPage = ({userID}) => {
 
   return (
     <div>
-      <Header />
+      <div
+        style={{
+          filter: isSidebarOpen ? 'blur(5px)' : 'none',
+          opacity: isSidebarOpen ? 0.5 : 1,
+          pointerEvents: isSidebarOpen ? 'none' : 'auto',
+        }}
+      >
+      <Header onProfileClick={handleProfileClick}/>
       <div style={styles.container}>
         <h2 style={styles.title}>Leaderboard</h2>
 
@@ -54,7 +68,9 @@ const LeaderboardPage = ({userID}) => {
           ))}
         </div>
       </div>
+      </div>
       <Navbar />
+      {isSidebarOpen && (<ProfileSidebar onClose={() => setIsSidebarOpen(false)} style={{ left: isSidebarOpen ? '0' : '-50%' }} />)}
     </div>
   );
 };
