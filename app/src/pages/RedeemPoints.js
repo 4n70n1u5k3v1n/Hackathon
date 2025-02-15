@@ -1,46 +1,79 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './RedeemPoints.css'; // Import the CSS file
+import { getAllItems } from '../api/items'; // Adjust the import path as needed
+import './RedeemPoints.css';
 
-const RedeemPoints = (userID) => {
-  const navigate = useNavigate();
+const RedeemPoints = () => {
+    const navigate = useNavigate();
+    const [products, setProducts] = useState([]);
+    const [points, setPoints] = useState(4900); // You can replace this with a dynamic API call if available
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-  const products = [
-    { id: 1, name: 'Wireless Mouse', points: 1000, image: 'https://via.placeholder.com/150' },
-    { id: 2, name: 'Mechanical Keyboard', points: 2000, image: 'https://via.placeholder.com/150' },
-    { id: 3, name: 'Gaming Monitor', points: 5000, image: 'https://via.placeholder.com/150' },
-    { id: 4, name: 'Gift Card', points: 100, image: 'https://via.placeholder.com/150' },
-  ];
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await getAllItems();
+                // If your API returns an object like { success: true, data: [...] }
+                // you may need to access response.data; otherwise, adjust accordingly.
+                if (response.success && response.data) {
+                    setProducts(response.data);
+                } else {
+                    // Fallback if response is simply the products array
+                    setProducts(response);
+                }
+            } catch (err) {
+                console.error('Error fetching items:', err);
+                setError('Failed to fetch products.');
+            } finally {
+                setLoading(false);
+            }
+        };
 
-  return (
-    <div className="redeemPoints-container">
-      {/* Back Button */}
-      <button className="redeemPoints-backButton" onClick={() => navigate(-1)}>
-        &larr; Back
-      </button>
+        fetchProducts().then(r => console.log('Products fetched'));
+    }, []);
 
-      {/* Points Display */}
-      <div className="redeemPoints-pointsContainer">
-        <div className="redeemPoints-pointsCard">
-          <h2>4900 Points</h2>
+    return (
+        <div className="redeemPoints-container">
+            {/* Back Button */}
+            <button className="redeemPoints-backButton" onClick={() => navigate(-1)}>
+                &larr; Back
+            </button>
+
+            {/* Points Display */}
+            <div className="redeemPoints-pointsContainer">
+                <div className="redeemPoints-pointsCard">
+                    <h2>{points} Points</h2>
+                </div>
+                <div className="redeemPoints-warningCard">
+                    <p>Your points will expire on 31 Dec 2025 23:59 SGT</p>
+                </div>
+            </div>
+
+            {/* Product Listing */}
+            <div className="redeemPoints-productList">
+                {loading ? (
+                    <p>Loading products...</p>
+                ) : error ? (
+                    <p>{error}</p>
+                ) : products.length > 0 ? (
+                    products.map((product) => (
+                        <div key={product.item_id} className="redeemPoints-productCard">
+                            <img
+                                src={product.item_photo}
+                                alt={product.item_name}
+                                className="redeemPoints-productImage"
+                            />
+                            <h3>{product.item_name}</h3>
+                            <p>{product.item_gc} Points</p>
+                        </div>
+                    ))
+                ) : (
+                    <p>No products available.</p>
+                )}
+            </div>
         </div>
-        <div className="redeemPoints-warningCard">
-          <p>Your points will expire on 31 Dec 2025 23:59 SGT</p>
-        </div>
-      </div>
-
-      {/* Product Listing */}
-      <div className="redeemPoints-productList">
-        {products.map((product) => (
-          <div key={product.id} className="redeemPoints-productCard">
-            <img src={product.image} alt={product.name} className="redeemPoints-productImage" />
-            <h3>{product.name}</h3>
-            <p>{product.points} Points</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+    );
 };
 
 export default RedeemPoints;
