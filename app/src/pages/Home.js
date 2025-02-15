@@ -11,7 +11,6 @@ const Home = ({userID}) => {
 
   const handleProfileClick = () => {
     setIsSidebarOpen(!isSidebarOpen);
-    console.log('userID:', userID);
   };
 
   return (
