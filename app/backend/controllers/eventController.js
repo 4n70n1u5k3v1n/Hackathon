@@ -58,11 +58,11 @@ exports.getEventbyUserID = async (req, res) => {
 exports.takeAttendance = async (req, res) => {
     const {userId, eventToken} = req.query;
     try {
-        const eventName = await getEventFromToken(eventToken);
-        console.log('eventName', eventName);
+        const event = await getEventFromToken(eventToken);
         
-        if (eventName.length > 0) {
-            const eventID = eventName[0].event_id;
+        if (event.length > 0) {
+            const eventID = event[0].event_id;
+            const eventName = event[0].event_name;
             const userAttends = await checkUserRegistration(userId, eventID);
             console.log('eventID:', eventID);
             
@@ -70,10 +70,17 @@ exports.takeAttendance = async (req, res) => {
                 await editAttendance (userId, eventID);
                 await updatePoints (userId, 500);
             }
-            return res.status(201).json(userAttends);
+            return res.status(201).json({
+                success: userAttends,
+                eventName: eventName
+            });
         }
 
-        return res.status(201).json(false);
+        return res.status(201).json({
+            success: false,
+            eventName: null
+        });
+
     } catch (error) {
         console.error ("Error checking attendance: ", error);
         res.status(500).json({ success: false, error: "Internal server error." });

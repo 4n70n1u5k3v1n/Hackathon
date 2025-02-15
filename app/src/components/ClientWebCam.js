@@ -119,12 +119,12 @@ const ClientWebCam = (userID) => {
   const processQR = async (qrCodeData) => {
     const qrCodeDataFormat = qrCodeData.trim();
     try {
-      const data = await takeAttendance('1', qrCodeDataFormat);
+      const { success, eventName } = await takeAttendance('1', qrCodeDataFormat);
 
-      if (data) {
+      if (success) {
         Swal.fire({
           title: "Success!",
-          text: "Attendance Successful!",
+          text: `Attendance for ${eventName} Successful!`,
           icon: "success",
           confirmButtonText: "OK"
       }).then(() => {
