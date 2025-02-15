@@ -42,7 +42,7 @@ exports.getEventFromToken = async (eventToken) => {
     }
 };
 
-exports.getEventByUserID () = async (userID) => {
+exports.getEventByUserID = async (userID) => {
     try {
         const query = `SELECT * FROM USER_EVENT WHERE user_id = ?`;
         const [events] = await db.execute(query, [userID]);
@@ -50,4 +50,4 @@ exports.getEventByUserID () = async (userID) => {
     } catch (error) {
         console.error("Error fetching all events:", error);
     }
-}
+};
