@@ -3,8 +3,9 @@ import Slider from 'react-slick';
 import { useNavigate } from 'react-router-dom';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import './EventCarousel.css'; // Import the CSS file
+import './EventCarousel.css'; 
 import { getAllEvents } from '../api/events';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const EventCarousel = () => {
   const [events, setEvents] = useState([]);
@@ -36,7 +37,7 @@ const EventCarousel = () => {
   };
 
   if (loading) {
-    return <div>Loading events...</div>;
+    return <LoadingSpinner />;
   }
 
   if (!events.length) {

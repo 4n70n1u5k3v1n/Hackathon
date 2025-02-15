@@ -36,16 +36,9 @@ const ChallengesList = ({userId}) => {
   return (
     <div style={styles.container}>
       <h2>Available Challenges</h2>
-      {challenges
-      .filter((challenge) => challenge.status === 'pending') // Filter challenges with 'pending' status
-      .map((challenge) => (
-        <div key={challenge.bschallenge_id} style={styles.challengeCard}>
-          <h3>
-            {challenge.bschallenge_title}
-            {challenge.status === 'completed' && (
-              <span style={{ marginLeft: '8px', color: 'green' }}>✔</span>
-            )}
-          </h3>
+      {challenges.map((challenge) => (
+        <div key={challenge.id} style={styles.challengeCard}>
+          <h3>{challenge.name}</h3>
           <p>{challenge.points} Points</p>
         </div>
   ))}

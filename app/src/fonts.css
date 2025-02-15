@@ -92,3 +92,9 @@
     font-weight: 400; /* Regular */
     font-style: normal;
   }
+
+  .roboto-bold{
+    font-family: 'Roboto', serif;
+    font-weight: 600; /* Regular */
+    font-style: normal;
+  }

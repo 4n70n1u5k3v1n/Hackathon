@@ -23,7 +23,7 @@ const Missions = ({userID}) => {
     <Header onProfileClick={handleProfileClick} userID={userID}/>
       <div>
         <div className="mission-container">
-          <h2 className="mission-title">Challenges</h2>
+          <h2 className="mission-title league-spartan-bold">Challenges</h2>
           {challenges.map((challenge) => (
             <div key={challenge.id} className="mission-card">
               <h3>{challenge.name}</h3>

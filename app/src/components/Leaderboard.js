@@ -23,7 +23,7 @@ const Leaderboard = () => {
 
   return (
     <div style={styles.container}>
-      <h2>Top 100 XPerts in Singapore</h2>
+      <h2 className='league-spartan-bold'>Top 100 XPerts in Singapore</h2>
       {users.map((user, index) => (
         <div key={user.user_id} style={styles.userRow}>
           <span>{index + 1}. {user.user_username}</span>
