@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {getUserPoints} from '../api/user';
+import { FaUserCircle } from "react-icons/fa";
 
   
 const Header = ({ onProfileClick, userID }) => {
@@ -11,6 +12,8 @@ const Header = ({ onProfileClick, userID }) => {
       setPoints(userPoints);
     };
 
+
+
     if (userID) {
       fetchPoints();
     }
@@ -18,7 +21,7 @@ const Header = ({ onProfileClick, userID }) => {
 
   return (
     <header style={styles.header}>
-      <div style={styles.profileCircle} onClick={onProfileClick}></div>
+     <FaUserCircle style={styles.profileIcon} onClick={onProfileClick} />
       <h1 style={styles.title}>GeekSpand</h1>
       <div style={styles.points}>{points} Points</div>
     </header>
@@ -37,12 +40,11 @@ const styles = {
     width: '100%',
     zIndex: 1000,
   },
-  profileCircle: {
-    width: '40px',
-    height: '40px',
-    borderRadius: '50%',
-    backgroundColor: '#ccc',
-    cursor: 'pointer',
+  profileIcon: {
+    width: "40px",
+    height: "40px",
+    color: "#555",  // Adjust color if needed
+    cursor: "pointer",
   },
   title: {
     margin: 0,

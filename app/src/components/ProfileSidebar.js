@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaUserCircle } from "react-icons/fa";
 
 const ProfileSidebar = ({ onClose }) => {
     const navigate = useNavigate();
@@ -9,7 +10,7 @@ const ProfileSidebar = ({ onClose }) => {
         &times;
       </button>
       <div style={styles.header}>
-        <div style={styles.profileCircle}></div>
+        <FaUserCircle style={styles.profileIcon} />
         <span style={styles.username}>User123</span>
       </div>
       <div style={styles.menu}>
@@ -50,11 +51,11 @@ const styles = {
     alignItems: 'center',
     marginBottom: '20px',
   },
-  profileCircle: {
-    width: '40px',
-    height: '40px',
-    borderRadius: '50%',
-    backgroundColor: '#ccc',
+  profileIcon: {
+    width: "40px",
+    height: "40px",
+    color: "#555",  // Adjust color if needed
+    cursor: "pointer",
   },
   username: {
     marginLeft: '10px',
