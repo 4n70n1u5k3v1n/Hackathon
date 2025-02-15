@@ -127,9 +127,9 @@ const ClientWebCam = (userID) => {
           text: `Attendance for ${eventName} Successful!`,
           icon: "success",
           confirmButtonText: "OK"
-      }).then(() => {
+        }).then(() => {
           window.location.reload(); // Reloads the page after user clicks "OK"
-      });
+        });
       } else {
         Swal.fire({
             title: "Error",

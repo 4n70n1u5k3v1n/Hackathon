@@ -45,6 +45,7 @@ export const takeAttendance = async (userId, eventToken) => {
         const response = await axios.get(`${BASE_URL}/takeattendance`, {
             params: { userId, eventToken }
         });
+        console.log('response: ', response.data);
         return response.data;
     } catch (error) {
         console.error ("Error taking attendance api: ", error);
