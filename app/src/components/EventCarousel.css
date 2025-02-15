@@ -4,9 +4,9 @@
     padding: 20px;             /* increased padding for spacing */
     background-color: #fffbf5;   /* light background color */
     border-radius: 15px;       /* rounded corners */
-    max-width: 370px;          /* constrains the width */
+    max-width: 90%;          /* constrains the width */
     text-align: center;        /* center content inside the container */
-    overflow: hidden;   
+    overflow: hidden;
     padding-top: 50px;       /* hide any overlapping content */
 }
 
