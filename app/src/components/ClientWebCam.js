@@ -1,18 +1,21 @@
-import React, { useState, useRef, useEffect } from 'react';
-import jsQR from 'jsqr';
+import React, { useState, useRef, useEffect } from "react";
+import jsQR from "jsqr";
+import qrlogo from "./qrlogo.svg";
+import "./ClientWebCam.css"; // Import CSS
 
 const ClientWebCam = () => {
   const [stream, setStream] = useState(null);
   const [qrCodeData, setQrCodeData] = useState(null);
+  const [isScanning, setIsScanning] = useState(false);
   const canvasRef = useRef(null);
 
   const handleStartWebcam = async () => {
     try {
       let constraints = {
         video: {
-          facingMode: "environment", // Try to use the back camera first
-          width: { ideal: 1280 },
-          height: { ideal: 720 },
+          facingMode: "environment",
+          width: { ideal: 640 },
+          height: { ideal: 480 },
         },
       };
 
@@ -21,11 +24,13 @@ const ClientWebCam = () => {
         mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
       } catch (error) {
         console.warn("Back camera unavailable, switching to front camera.");
-        constraints.video.facingMode = "user"; // Fall back to front camera
+        constraints.video.facingMode = "user";
         mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
       }
 
       setStream(mediaStream);
+      setIsScanning(true);
+      setQrCodeData(null);
     } catch (error) {
       console.error("Error accessing camera:", error);
     }
@@ -35,6 +40,7 @@ const ClientWebCam = () => {
     if (stream) {
       stream.getTracks().forEach((track) => track.stop());
       setStream(null);
+      setIsScanning(false);
       setQrCodeData(null);
     }
   };
@@ -46,10 +52,11 @@ const ClientWebCam = () => {
     const context = canvas.getContext("2d");
     const video = document.createElement("video");
     video.srcObject = stream;
-    video.setAttribute("playsinline", true); // Required for iOS Safari
+    video.setAttribute("playsinline", true);
     video.play();
 
     let animationFrameId;
+    let closeTimeoutId;
 
     const render = () => {
       if (video.readyState === video.HAVE_ENOUGH_DATA) {
@@ -66,6 +73,10 @@ const ClientWebCam = () => {
           drawLine(context, code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
           drawLine(context, code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
           drawLine(context, code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
+
+          closeTimeoutId = setTimeout(() => {
+            handleStopWebcam();
+          }, 1000);
         } else {
           setQrCodeData(null);
         }
@@ -77,6 +88,7 @@ const ClientWebCam = () => {
 
     return () => {
       cancelAnimationFrame(animationFrameId);
+      clearTimeout(closeTimeoutId);
       stream.getTracks().forEach((track) => track.stop());
     };
   }, [stream]);
@@ -91,15 +103,22 @@ const ClientWebCam = () => {
   };
 
   return (
-      <div style={{ display: "grid", gap: "1rem" }}>
-        <h1>Webcam QR Code Scanner</h1>
-        <div>
-          <button onClick={handleStartWebcam}>Start Webcam</button>
-          <button onClick={handleStopWebcam}>Stop Webcam</button>
-        </div>
-        <canvas ref={canvasRef} style={{ width: "100%", maxWidth: "480px" }} />
+      <div className="webcam-container">
+        <button onClick={handleStartWebcam} className="qr-button">
+          <img src={qrlogo} alt="Scan QR Code" className="qr-icon" />
+        </button>
+
+        {isScanning && (
+            <div className="scanning-overlay">
+              <button onClick={handleStopWebcam} className="close-button">×</button>
+              <div className="canvas-container">
+                <canvas ref={canvasRef} className="qr-canvas" />
+              </div>
+            </div>
+        )}
+
         {qrCodeData && (
-            <div>
+            <div className="qr-result">
               <h2>QR Code Detected:</h2>
               <p>{qrCodeData}</p>
             </div>

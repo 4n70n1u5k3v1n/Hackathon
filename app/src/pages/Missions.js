@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 
-const Missions = () => {
+const Missions = ({userID}) => {
   const challenges = [
     { id: 1, name: 'Join an Event', progress: '0/1', points: 100 },
     { id: 2, name: 'Make a New Friend', progress: '0/1', points: 200 },

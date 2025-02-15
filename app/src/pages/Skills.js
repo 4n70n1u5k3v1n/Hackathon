@@ -3,11 +3,13 @@ import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Swal from 'sweetalert2';
 
-const Skills = () => {
+
+const Skills = ({userID}) => {
     const programmingLanguages = [
         'Python', 'JavaScript', 'Java', 'C++', 'C#', 'Ruby', 'Swift', 'Go', 'PHP', 'Kotlin'
       ];
-  // Dummy data for listings
+
+ // Dummy data for listings
   const initialListings = [
     {
       id: 1,

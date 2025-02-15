@@ -8,6 +8,7 @@ import LeaderboardPage from './pages/LeaderboardPage';
 import RedeemPoints from './pages/RedeemPoints';
 
 const App = () => {
+  c
   return (
     <Router>
       <Routes>

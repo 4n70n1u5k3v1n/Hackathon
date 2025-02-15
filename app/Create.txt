@@ -27,6 +27,7 @@ CREATE TABLE USER_TAG (
 CREATE TABLE EVENT (
     event_id INT PRIMARY KEY,
     event_name VARCHAR(100),
+    event_description VARCHAR(255),
     event_date DATE,
     event_time TIME,
     event_location VARCHAR(255),
