@@ -50,6 +50,24 @@ const EventList = ({ userId }) => {
         }
     };
 
+    const formatDateTime = (date, time) => {
+        const eventDate = new Date(date);
+        const formattedDate = eventDate.toLocaleDateString("en-US", {
+            weekday: "long", 
+            year: "numeric",
+            month: "long", 
+            day: "numeric"
+        });
+
+        const eventTime = new Date(`1970-01-01T${time}`).toLocaleTimeString("en-US", {
+            hour: "numeric",
+            minute: "2-digit",
+            hour12: true 
+        });
+
+        return `${formattedDate} at ${eventTime}`;
+    };
+
     if (loading) {
         return <p>Loading events...</p>;
     }
@@ -65,7 +83,7 @@ const EventList = ({ userId }) => {
                 {events.map(event => (
                     <li key={event.event_id} style={styles.eventItem} onClick={() => handleEventClick(event)}>
                         <strong>{event.event_name}</strong>
-                        <p>{event.event_date} at {event.event_time}</p>
+                        <p>{formatDateTime(event.event_date, event.event_time)}</p>
                         <p>Location: {event.event_location}</p>
                         <p>Description: {event.description}</p>
                     </li>
@@ -89,6 +107,7 @@ const EventList = ({ userId }) => {
         </div>
     );
 };
+
 
 const styles = {
     container: {
