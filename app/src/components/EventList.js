@@ -92,7 +92,7 @@ const EventList = ({ userId }) => {
 const styles = {
     container: {
         padding: "20px",
-        backgroundColor: "#f8f9fa",
+        backgroundColor: "#fffbf5",
         borderRadius: "10px",
         maxWidth: "600px",
         margin: "auto",
