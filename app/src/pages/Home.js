@@ -5,8 +5,9 @@ import ChallengesList from '../components/ChallengesList';
 import Leaderboard from '../components/Leaderboard';
 import Navbar from '../components/Navbar';
 import ProfileSidebar from '../components/ProfileSidebar';
+import "./Home.css"; // Import the CSS file
 
-const Home = ({userID}) => {
+const Home = ({ userID }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleProfileClick = () => {
@@ -14,13 +15,9 @@ const Home = ({userID}) => {
   };
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div className="home-container">
       <div
-        style={{
-          filter: isSidebarOpen ? 'blur(5px)' : 'none',
-          opacity: isSidebarOpen ? 0.5 : 1,
-          pointerEvents: isSidebarOpen ? 'none' : 'auto',
-        }}
+        className={`blur-overlay ${isSidebarOpen ? 'blur-overlay-active' : ''}`}
       >
         <Header onProfileClick={handleProfileClick} />
         <EventCarousel />
@@ -28,7 +25,12 @@ const Home = ({userID}) => {
         <Leaderboard />
         <Navbar />
       </div>
-      {isSidebarOpen && (<ProfileSidebar onClose={() => setIsSidebarOpen(false)} style={{ left: isSidebarOpen ? '0' : '-50%' }} />)}
+      {isSidebarOpen && (
+        <ProfileSidebar
+          onClose={() => setIsSidebarOpen(false)}
+          className={isSidebarOpen ? 'profile-sidebar-open' : 'profile-sidebar-closed'}
+        />
+      )}
     </div>
   );
 };

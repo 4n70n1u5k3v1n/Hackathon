@@ -41,13 +41,13 @@ const navLinks = [
 const styles = {
   navbar: {
     display: 'flex',
-    justifyContent: 'space-around',
-    padding: '10px',
-    backgroundColor: '#AD2831',
-    position: 'fixed',
-    bottom: 0,
-    width: '100%',
-    zIndex: 1000,
+  justifyContent: 'space-around',
+  padding: '0px 0',  // Reduce padding for smaller height
+  backgroundColor: '#AD2831',
+  position: 'fixed',
+  bottom: 0,
+  width: '100%',
+  zIndex: 1000,
   },
   link: {
     color: 'white',
