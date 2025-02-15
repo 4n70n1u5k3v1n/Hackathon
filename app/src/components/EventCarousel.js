@@ -29,12 +29,17 @@ const EventCarousel = () => {
 const styles = {
   carousel: {
     margin: '20px',
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '25vh',
+    overflowX: 'hidden',
   },
   eventCard: {
     backgroundColor: '#e9ecef',
     padding: '20px',
     borderRadius: '10px',
     textAlign: 'center',
+
   },
 };
 

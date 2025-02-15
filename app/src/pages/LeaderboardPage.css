@@ -1,20 +1,29 @@
 /* LeaderboardPage.css */
-.home-container {
+.leaderboardPage-container {
     position: relative;
     background-color: #FFFBF5;
     width: 100%;  
-    height: 100%;
-    padding-top: 80px; 
-    padding-bottom: 60px;
+    min-height: 100vh; /* Ensure the container takes at least the full height of the viewport */
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px; 
+    padding-bottom: 30px;
+ }
+
+ .leaderboardPage-wrapper {
+    max-width: 1200px; /* Adjust as needed */
+    margin: 0 auto; /* Center the content */
+    padding-left: 20px; /* Add space on the left */
+    padding-right: 20px; /* Add space on the right */
 }
 
-.home-title {
+.leaderboardPage-title {
     margin-bottom: 20px;
     font-size: 1.5rem;
     font-weight: bold;
 }
 
-.home-podium {
+.leaderboardPage-podium {
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -23,7 +32,7 @@
     padding: 2%;
 }
 
-.home-podiumFirst {
+.leaderboardPage-podiumFirst {
     background-color: #ffd700;
     padding: 20px;
     border-radius: 10px;
@@ -35,7 +44,7 @@
     justify-content: center;
 }
 
-.home-podiumSecond {
+.leaderboardPage-podiumSecond {
     background-color: #c0c0c0;
     padding: 20px;
     border-radius: 10px;
@@ -47,7 +56,7 @@
     justify-content: center;
 }
 
-.home-podiumThird {
+.leaderboardPage-podiumThird {
     background-color: #cd7f32;
     padding: 20px;
     border-radius: 10px;
@@ -59,24 +68,24 @@
     justify-content: center;
 }
 
-.home-podiumName {
+.leaderboardPage-podiumName {
     margin: 0;
     font-size: 1.2rem;
     font-weight: bold;
 }
 
-.home-podiumPoints {
+.leaderboardPage-podiumPoints {
     margin: 0;
     font-size: 0.9rem;
 }
 
-.home-userList {
+.leaderboardPage-userList {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.home-userRow {
+.leaderboardPage-userRow {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -85,15 +94,15 @@
     padding: 10px;
 }
 
-.home-userRank {
+.leaderboardPage-userRank {
     font-weight: bold;
 }
 
-.home-userName {
+.leaderboardPage-userName {
     flex: 1;
     margin-left: 10px;
 }
 
-.home-userPoints {
+.leaderboardPage-userPoints {
     font-weight: bold;
 }

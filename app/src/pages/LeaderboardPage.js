@@ -26,7 +26,7 @@ const LeaderboardPage = ({userID}) => {
   const remainingUsers = users.slice(3); // Remaining users for the list
 
   return (
-    <div className="home-container">
+    <div>
       <div
         style={{
           filter: isSidebarOpen ? 'blur(5px)' : 'none',
@@ -35,36 +35,36 @@ const LeaderboardPage = ({userID}) => {
         }}
       >
       <Header onProfileClick={handleProfileClick}/>
-      <div>
-        <h2 className="home-title">Leaderboard</h2>
+      <div className="leaderboardPage-container">
+        <h2 className="leaderboardPage-title">Leaderboard</h2>
         {/* Podium for Top 3 */}
-        <div className="home-podium">
+        <div className="leaderboardPage-podium">
           {/* 2nd Place */}
-          <div className="home-podiumSecond">
-            <h3 className="home-podiumName">{top3[1].name}</h3>
-            <p className="home-podiumPoints">{top3[1].points} Points</p>
+          <div className="leaderboardPage-podiumSecond">
+            <h3 className="leaderboardPage-podiumName">{top3[1].name}</h3>
+            <p className="leaderboardPage-podiumPoints">{top3[1].points} Points</p>
           </div>
 
           {/* 1st Place */}
-          <div className="home-podiumFirst">
-            <h3 className="home-podiumName">{top3[0].name}</h3>
-            <p className="home-podiumPoints">{top3[0].points} Points</p>
+          <div className="leaderboardPage-podiumFirst">
+            <h3 className="leaderboardPage-podiumName">{top3[0].name}</h3>
+            <p className="leaderboardPage-podiumPoints">{top3[0].points} Points</p>
           </div>
 
           {/* 3rd Place */}
-          <div className="home-podiumThird">
-            <h3 className="home-podiumName">{top3[2].name}</h3>
-            <p className="home-podiumPoints">{top3[2].points} Points</p>
+          <div className="leaderboardPage-podiumThird">
+            <h3 className="leaderboardPage-podiumName">{top3[2].name}</h3>
+            <p className="leaderboardPage-podiumPoints">{top3[2].points} Points</p>
           </div>
         </div>
 
         {/* List of Remaining Users */}
-        <div className="home-userList">
+        <div className="leaderboardPage-userList">
           {remainingUsers.map((user, index) => (
-            <div key={user.id} className="home-userRow">
-              <span className="home-userRank">{index + 4}.</span>
-              <span className="home-userName">{user.name}</span>
-              <span className="home-userPoints">{user.points} Points</span>
+            <div key={user.id} className="leaderboardPage-userRow">
+              <span className="leaderboardPage-userRank">{index + 4}.</span>
+              <span className="leaderboardPage-userName">{user.name}</span>
+              <span className="leaderboardPage-userPoints">{user.points} Points</span>
             </div>
           ))}
         </div>

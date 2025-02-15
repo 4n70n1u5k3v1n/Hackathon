@@ -6,7 +6,6 @@ import ClientWebCam from "../components/ClientWebCam";
 import "./Events.css"; // Import the CSS file
 import ProfileSidebar from '../components/ProfileSidebar';
 
-
 const Events = ({userID}) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     
@@ -15,25 +14,22 @@ const Events = ({userID}) => {
       };
 
   return (
-    <div className="events-container">
+    <div>
       <Header onProfileClick={handleProfileClick} />
-   
-    
-        <div className='events-content'
-        style={{
-          filter: isSidebarOpen ? 'blur(5px)' : 'none',
-          opacity: isSidebarOpen ? 0.5 : 1,
-          pointerEvents: isSidebarOpen ? 'none' : 'auto',
-        }}
-      >
-      
-      <div style={{ padding: "20px" }}>
-        <h2>Events Page</h2>
-        <EventList EventList userId={userID} />
-        <ClientWebCam />
-      </div>
-      <Navbar />
-      </div>
+        <div className="events-container">
+            <div className='events-content'
+            style={{
+            filter: isSidebarOpen ? 'blur(5px)' : 'none',
+            opacity: isSidebarOpen ? 0.5 : 1,
+            pointerEvents: isSidebarOpen ? 'none' : 'auto',
+        }}>
+            <div style={{ padding: "10px" }}>
+                <EventList EventList userId={userID} />
+                <ClientWebCam />
+            </div>
+        </div>
+        </div>
+        <Navbar />
       {isSidebarOpen && (<ProfileSidebar onClose={() => setIsSidebarOpen(false)} style={{ left: isSidebarOpen ? '0' : '-50%' }} />)}
     </div>
     

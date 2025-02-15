@@ -25,17 +25,19 @@
 /* Tab button */
 .skills-tab {
     padding: 10px 20px;
-    border: none;
-    background-color: #f8f9fa;
+    border-radius: 10px;
+    background-color: #ffffff;
     cursor: pointer;
+    border-color: #FFFBF5;
 }
 
 /* Active tab button */
 .skills-activeTab {
     padding: 10px 20px;
-    border: none;
-    background-color: #007bff;
+    border-radius: 10px;
+    background-color: #6c92eb;
     color: #fff;
+    border-color: #FFFBF5;
     cursor: pointer;
 }
 
@@ -43,16 +45,17 @@
 .skills-friendsList {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
 }
 
 /* Friend card style */
 .skills-friendCard {
     display: flex;
     align-items: center;
-    background-color: #f8f9fa;
-    border-radius: 10px;
+    background-color: #ffffff;
+    border-radius: 20px;
     padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Profile picture styling */
@@ -66,6 +69,7 @@
 /* Friend info container */
 .skills-friendInfo {
     flex: 1;
+    background-color: #ffffff;
 }
 
 /* Username style */
@@ -84,7 +88,7 @@
 
 /* Request button style */
 .skills-requestButton {
-    background-color: #007bff;
+    background-color: #6c92eb;
     color: #fff;
     border: none;
     padding: 10px 15px;
@@ -94,7 +98,7 @@
 
 /* Cancel button style */
 .skills-cancelButton {
-    background-color: #dc3545;
+    background-color: #ad2831;
     color: #fff;
     border: none;
     padding: 10px 15px;
@@ -110,7 +114,7 @@
 
 /* Accept button style */
 .skills-acceptButton {
-    background-color: #28a745;
+    background-color: #4c956c;
     color: #fff;
     border: none;
     padding: 10px;
@@ -120,7 +124,7 @@
 
 /* Reject button style */
 .skills-rejectButton {
-    background-color: #dc3545;
+    background-color: #ad2831;
     color: #fff;
     border: none;
     padding: 10px;
@@ -130,7 +134,7 @@
 
 /* Chat button style */
 .skills-chatButton {
-    background-color: #007bff;
+    background-color: #6c92eb;
     color: #fff;
     border: none;
     padding: 10px 15px;
@@ -146,7 +150,7 @@
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background-color: #007bff;
+    background-color: #6c92eb;
     color: #fff;
     border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -189,7 +193,7 @@
 
 /* Submit button styling */
 .skills-submitButton {
-    background-color: #007bff;
+    background-color: #6c92eb;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -200,7 +204,7 @@
 
 /* Close button styling */
 .skills-closeButton {
-    background-color: #dc3545;
+    background-color: #ad2831;
     color: #fff;
     border: none;
     padding: 10px 20px;

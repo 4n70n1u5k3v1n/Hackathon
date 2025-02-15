@@ -5,7 +5,6 @@ import Swal from 'sweetalert2';
 import './Skills.css';  // Import the CSS file
 import ProfileSidebar from '../components/ProfileSidebar';
 
-
 const Skills = ({userID}) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     
@@ -117,8 +116,9 @@ const Skills = ({userID}) => {
     return (
         <div>
             <Header />
-            <div className="skills-container">
-                <h2 className="skills-title">Skills Exchange</h2>
+            <div style={{ paddingLeft: "10px" , paddingRight:'10px', backgroundColor:"#fffbf5"}}>
+            <div className="skills-container" >
+                <h2 className="skills-title" >Skills Exchange</h2>
 
                 {/* Tabs */}
                 <div className="skills-tabs">
@@ -221,7 +221,7 @@ const Skills = ({userID}) => {
 
                 {/* Accepted Tab */}
                 {activeTab === 'accepted' && (
-                    <div className="skills-friendsList">
+                    <div className="skills-friendsList" >
                         {accepted.map((user) => (
                             <div key={user.id} className="skills-friendCard">
                                 <img src={user.profilePic} alt={user.name} className="skills-profilePic" />
@@ -273,7 +273,7 @@ const Skills = ({userID}) => {
                     </div>
                 </div>
             )}
-
+            </div>
             <Navbar />
         </div>
     );
