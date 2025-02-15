@@ -7,8 +7,8 @@
 /* QR Scan Button */
 .qr-button {
     position: fixed;
-    bottom: 2rem;
-    right: 2rem;
+    bottom: 6rem;
+    right: 1rem;
     background: none;
     border: none;
     cursor: pointer;

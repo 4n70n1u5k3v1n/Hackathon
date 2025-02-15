@@ -31,3 +31,23 @@ exports.registerUserForEvent = async (userId, eventId) => {
         throw error;
     }
 };
+
+exports.getEventFromToken = async (eventToken) => {
+    try {
+        const query = `SELECT * FROM EVENT WHERE event_qr = ?`;
+        const [events] = await db.execute(query, [eventToken]);
+        return events;
+    } catch (error) {
+        console.error("Error fetching all events:", error);
+    }
+};
+
+exports.getEventByUserID = async (userID) => {
+    try {
+        const query = `SELECT * FROM USER_EVENT WHERE user_id = ?`;
+        const [events] = await db.execute(query, [userID]);
+        return events;
+    } catch (error) {
+        console.error("Error fetching all events:", error);
+    }
+};
