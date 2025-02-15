@@ -10,7 +10,7 @@ const Events = ({userID}) => {
       <Header />
       <div style={{ padding: "20px" }}>
         <h2>Events Page</h2>
-        <EventList /> 
+        <EventList EventList userId={userID}/> 
         <ClientWebCam />
       </div>
       <Navbar />
