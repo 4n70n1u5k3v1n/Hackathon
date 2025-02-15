@@ -55,6 +55,11 @@ const EventList = ({ userId }) => {
         try {
             await registerUserForEvent(userId, selectedEvent.event_id);
             setIsRegistered(true);
+            Swal.fire({
+                icon: 'success',
+                title: 'Registered Successfully!',
+                confirmButtonText: 'OK',
+            })
         } catch (err) {
             console.error("Error registering for event:", err);
             setError("Failed to register.");
@@ -106,7 +111,10 @@ const EventList = ({ userId }) => {
             title: 'Invitation Sent!',
             text: `Friend code "${friendCode}" is invited.`,
             confirmButtonText: 'OK',
+        }).then(() => {
+            window.location.reload(); // Reloads AFTER the user clicks "OK"
         });
+        
           }else {
             throw new Error(response.message || 'Failed to add points');
         }
@@ -121,6 +129,7 @@ const EventList = ({ userId }) => {
             // Reset the input field and close the popup
             setFriendCode('');
             setShowInvitePopup(false);
+            
         }
     };
 
