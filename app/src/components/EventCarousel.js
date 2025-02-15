@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
+import { useNavigate } from 'react-router-dom';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './EventCarousel.css'; // Import the CSS file
@@ -8,6 +9,7 @@ import { getAllEvents } from '../api/events';
 const EventCarousel = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -45,7 +47,15 @@ const EventCarousel = () => {
       <div className="carousel-container">
         <Slider {...settings}>
           {events.map((event) => (
-              <div key={event.event_id} className="event-card">
+            // <a
+            // key={event.event_id}
+            // href={`/events`} // Change to the actual event link
+            // className="event-card-link">
+              <div
+                key={event.event_id}
+                className="event-card"
+                onClick={() => navigate(`/events`)}
+                style={{ cursor: "pointer" }}>
                 <h3>{event.event_name}</h3>
                 <p>
                   <strong>Date:</strong>{' '}
@@ -63,6 +73,7 @@ const EventCarousel = () => {
                   <strong>Location:</strong> {event.event_location}
                 </p>
               </div>
+            // </a>
           ))}
         </Slider>
       </div>
