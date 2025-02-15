@@ -139,7 +139,7 @@ const Skills = ({userID}) => {
 
     return (
         <div>
-            <Header />
+            <Header onProfileClick={handleProfileClick} userID={userID}/>
             <div style={{ paddingLeft: "10px" , paddingRight:'10px', backgroundColor:"#fffbf5"}}>
             <div className="skills-container" >
                 <h2 className="skills-title" >Skills Exchange</h2>

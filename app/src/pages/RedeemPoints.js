@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './RedeemPoints.css'; // Import the CSS file
 
-const RedeemPoints = () => {
+const RedeemPoints = (userID) => {
   const navigate = useNavigate();
 
   const products = [

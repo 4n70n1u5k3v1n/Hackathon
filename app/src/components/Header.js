@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import {getUserPoints} from '../api/user';
 
-const Header = ({ onProfileClick }) => {
+  
+const Header = ({ onProfileClick, userID }) => {
+  const [points, setPoints] = useState(0);
+
+  useEffect(() => {
+    const fetchPoints = async () => {
+      const userPoints = await getUserPoints(userID);
+      setPoints(userPoints);
+    };
+
+    if (userID) {
+      fetchPoints();
+    }
+  }, [userID]);
+
   return (
     <header style={styles.header}>
       <div style={styles.profileCircle} onClick={onProfileClick}></div>
       <h1 style={styles.title}>GeekSpand</h1>
-      <div style={styles.points}>1000 Points</div>
+      <div style={styles.points}>{points} Points</div>
     </header>
   );
 };

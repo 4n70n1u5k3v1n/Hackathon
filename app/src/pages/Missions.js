@@ -26,7 +26,7 @@ const Missions = ({userID}) => {
         pointerEvents: isSidebarOpen ? 'none' : 'auto',
       }}
     >
-    <Header onProfileClick={handleProfileClick}/>
+    <Header onProfileClick={handleProfileClick} userID={userID}/>
       <div>
       <div className="mission-container">
         <h2 className="mission-title">Challenges</h2>

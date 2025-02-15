@@ -15,7 +15,7 @@ const Events = ({userID}) => {
 
   return (
     <div>
-      <Header onProfileClick={handleProfileClick} />
+      <Header onProfileClick={handleProfileClick} userID={userID}/>
         <div className="events-container">
             <div className='events-content'
             style={{

@@ -5,7 +5,7 @@ import ProfileSidebar from '../components/ProfileSidebar';
 import { getLeaderboard } from '../api/leaderboard';
 import "./LeaderboardPage.css";
 
-const LeaderboardPage = () => {
+const LeaderboardPage = ({userID}) => {
   const [users, setUsers] = useState([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   
@@ -41,7 +41,7 @@ const LeaderboardPage = () => {
           pointerEvents: isSidebarOpen ? 'none' : 'auto',
         }}
       >
-      <Header onProfileClick={handleProfileClick}/>
+      <Header onProfileClick={handleProfileClick} userID={userID}/>
       <div className="leaderboardPage-container">
         <h2 className="leaderboardPage-title">Leaderboard</h2>
         {/* Podium for Top 3 */}
