@@ -27,7 +27,7 @@ const Missions = ({userID}) => {
       }}
     >
     <Header onProfileClick={handleProfileClick}/>
-      
+      <div>
       <div className="mission-container">
         <h2 className="mission-title">Challenges</h2>
         {challenges.map((challenge) => (
@@ -38,6 +38,7 @@ const Missions = ({userID}) => {
             </p>
           </div>
         ))}
+      </div>
       </div>
       <Navbar />
       </div>

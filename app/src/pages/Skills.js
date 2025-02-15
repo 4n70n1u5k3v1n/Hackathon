@@ -5,7 +5,6 @@ import Swal from 'sweetalert2';
 import './Skills.css';  // Import the CSS file
 import ProfileSidebar from '../components/ProfileSidebar';
 
-
 const Skills = ({userID}) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     
@@ -15,6 +14,30 @@ const Skills = ({userID}) => {
 
     const programmingLanguages = [
         'Python', 'JavaScript', 'Java', 'C++', 'C#', 'Ruby', 'Swift', 'Go', 'PHP', 'Kotlin'
+    ];
+
+    const initialIncoming = [
+        {
+            id: 4,
+            name: 'User321',
+            profilePic: 'https://via.placeholder.com/50',
+            skillsWant: 'JavaScript',
+            skillsOffered: 'Python',
+        },
+        {
+            id: 5,
+            name: 'User654',
+            profilePic: 'https://via.placeholder.com/50',
+            skillsWant: 'UI/UX Design',
+            skillsOffered: 'Graphic Design',
+        },
+        {
+            id: 6,
+            name: 'User987',
+            profilePic: 'https://via.placeholder.com/50',
+            skillsWant: 'Photography',
+            skillsOffered: 'Video Editing',
+        },
     ];
 
     // Dummy data for listings
@@ -45,7 +68,7 @@ const Skills = ({userID}) => {
     // State for managing listings, requested, incoming, and accepted
     const [listings, setListings] = useState(initialListings);
     const [requested, setRequested] = useState([]);
-    const [incoming, setIncoming] = useState([]);
+    const [incoming, setIncoming] = useState([initialIncoming]);
     const [accepted, setAccepted] = useState([]);
 
     // State for active tab
@@ -117,8 +140,9 @@ const Skills = ({userID}) => {
     return (
         <div>
             <Header />
-            <div className="skills-container">
-                <h2 className="skills-title">Skills Exchange</h2>
+            <div style={{ paddingLeft: "10px" , paddingRight:'10px', backgroundColor:"#fffbf5"}}>
+            <div className="skills-container" >
+                <h2 className="skills-title" >Skills Exchange</h2>
 
                 {/* Tabs */}
                 <div className="skills-tabs">
@@ -221,7 +245,7 @@ const Skills = ({userID}) => {
 
                 {/* Accepted Tab */}
                 {activeTab === 'accepted' && (
-                    <div className="skills-friendsList">
+                    <div className="skills-friendsList" >
                         {accepted.map((user) => (
                             <div key={user.id} className="skills-friendCard">
                                 <img src={user.profilePic} alt={user.name} className="skills-profilePic" />
@@ -273,7 +297,7 @@ const Skills = ({userID}) => {
                     </div>
                 </div>
             )}
-
+            </div>
             <Navbar />
         </div>
     );

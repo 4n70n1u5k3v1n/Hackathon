@@ -4,7 +4,7 @@ const Header = ({ onProfileClick }) => {
   return (
     <header style={styles.header}>
       <div style={styles.profileCircle} onClick={onProfileClick}></div>
-      <h1 style={styles.title}>Challenge Platform</h1>
+      <h1 style={styles.title}>GeekSpand</h1>
       <div style={styles.points}>1000 Points</div>
     </header>
   );
@@ -32,10 +32,12 @@ const styles = {
   title: {
     margin: 0,
     fontSize: '1.5rem',
+    color:'#FFFBF5',
   },
   points: {
     fontSize: '1rem',
     paddingRight: '12px',
+    color:'#FFFBF5',
   },
 };
 

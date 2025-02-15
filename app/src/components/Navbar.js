@@ -22,7 +22,7 @@ const Navbar = () => {
             ...styles.icon,
             transform: location.pathname === path ? 'translateY(-22px)' : 'none',  // This makes the active icon move up
           }}>
-            {React.cloneElement(icon, { size: location.pathname === path ? 50 : 24, color: location.pathname === path ? 'black' : 'white' })}
+            {React.cloneElement(icon, { size: location.pathname === path ? 50 : 24, color: location.pathname === path ? '#FFFBF5' : '#FFFBF5' })}
           </span>
         </Link>
       ))}

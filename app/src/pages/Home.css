@@ -3,11 +3,12 @@
     position: relative;
     background-color: #FFFBF5;
     width: 100%;
-    min-height: 100vh; /* Ensure the container takes at least the full height of the viewport */
+    min-height: 125vh; /* Ensure the container takes at least the full height of the viewport */
     display: flex;
     flex-direction: column;
-    padding-top: 80px; 
-    padding-bottom: 60px;
+    /* padding-top: 30px;  */
+    padding-bottom: 20px;
+    
 }
 
 .home-blur-overlay {
@@ -27,7 +28,8 @@
     flex-direction: column;
     gap: 20px;
     flex: 1; /* Allow content to take up all available space */
-    padding-bottom: 60px; /* Make space for the fixed navbar at the bottom */
+    padding-bottom: 150px; /* Make space for the fixed navbar at the bottom */
+    margin-bottom: 10px;
 }
 
 h2 {

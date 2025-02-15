@@ -15,14 +15,15 @@ const Home = ({ userID }) => {
   };
 
   return (
-    <div className="home-container">
+    <div>
       <div
-        className={`home-blur-overlay ${isSidebarOpen ? 'home-blur-overlay-active' : ''}`}
-      >
+        className={`home-blur-overlay ${isSidebarOpen ? 'home-blur-overlay-active' : ''}`}>
         <Header onProfileClick={handleProfileClick} />
-        <EventCarousel />
-        <ChallengesList />
-        <Leaderboard />
+        <div className="home-container">
+            <EventCarousel />
+            <ChallengesList />
+            <Leaderboard />
+        </div>
         <Navbar />
       </div>
       {isSidebarOpen && (

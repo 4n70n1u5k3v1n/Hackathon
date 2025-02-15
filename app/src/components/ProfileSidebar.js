@@ -29,7 +29,7 @@ const styles = {
         position: 'fixed',
         top: 0,
         width: '50%',
-        height: '100%',
+        height: '95%',
         backgroundColor: '#fff',
         boxShadow: '2px 0 5px rgba(0, 0, 0, 0.1)',
         zIndex: 1001,
@@ -76,3 +76,4 @@ const styles = {
 };
 
 export default ProfileSidebar;
+
