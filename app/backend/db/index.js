@@ -6,7 +6,7 @@ const pool = mysql.createPool({
     host: process.env.DB_HOST || '34.67.118.54',
     user: process.env.DB_USER || 'root',
     password: process.env.DB_PASSWORD || 'Vvs319338',
-    database: process.env.DB_NAME ||  'HACKATON' ,
+    database: process.env.DB_NAME ||  'HACKATHON' ,
     port: process.env.DB_PORT || '8080',
     waitForConnections: true,
 });
