@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getAllEvents, checkUserEvent, registerUserForEvent } from "../api/events";
+import { getAllEvents, checkUserEvent, registerUserForEvent, unregisterUserFromEvent } from "../api/events";
+import { addPoints, getUserPoints } from "../api/user";
 import LoadingSpinner from '../components/LoadingSpinner';
+import Swal from 'sweetalert2';
 
 const EventList = ({ userId }) => {
     const [events, setEvents] = useState([]);
@@ -8,6 +10,9 @@ const EventList = ({ userId }) => {
     const [error, setError] = useState(null);
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [isRegistered, setIsRegistered] = useState(false);
+    const [showInvitePopup, setShowInvitePopup] = React.useState(false);
+    const [friendCode, setFriendCode] = React.useState('');
+    const [userPoints, setUserPoints] = useState(0);
 
     useEffect(() => {
         const fetchEvents = async () => {
@@ -21,8 +26,19 @@ const EventList = ({ userId }) => {
                 setLoading(false);
             }
         };
+        const fetchUserPoints = async () => {
+            try {
+                const points = await getUserPoints(userId); // Fetch user points
+                setUserPoints(points);
+            } catch (err) {
+                console.error("Error fetching user points:", err);
+                setUserPoints(0);
+            }
+        };
+
         fetchEvents();
-    }, []);
+        fetchUserPoints();
+    }, [userId]);
 
     const handleEventClick = async (event) => {
         try {
@@ -39,15 +55,81 @@ const EventList = ({ userId }) => {
         try {
             await registerUserForEvent(userId, selectedEvent.event_id);
             setIsRegistered(true);
+            Swal.fire({
+                icon: 'success',
+                title: 'Registered Successfully!',
+                confirmButtonText: 'OK',
+            })
         } catch (err) {
             console.error("Error registering for event:", err);
             setError("Failed to register.");
         }
     };
 
+    const handleUnregister = async () => {
+        try {
+            const response = await unregisterUserFromEvent(userId, selectedEvent.event_id);
+    
+            if (response.success) {
+                setIsRegistered(false); // Update the state to reflect unregistration
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Unregistered!',
+                    text: 'You have successfully unregistered from the event.',
+                    confirmButtonText: 'OK',
+                });
+            } else {
+                throw new Error(response.message || 'Failed to unregister.');
+            }
+        } catch (error) {
+            console.error('Error unregistering:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Failed to unregister. Please try again.',
+            });
+        }
+    };
+
     const handleClosePopup = (e) => {
         if (e.target.id === "popup-container") {
             setSelectedEvent(null);
+        }
+    };
+
+    const handleInviteFriend = async () => {
+        try {
+            // Call the backend API to add 100 points
+            const response = await addPoints(userId, 100);
+
+            if (response.success) {
+                // Update the user's points in the frontend state
+                setUserPoints((prevPoints) => prevPoints + 100);
+        //console.log('Friend Code:', friendCode);
+        Swal.fire({
+            icon: 'success',
+            title: 'Invitation Sent!',
+            text: `Friend code "${friendCode}" is invited.`,
+            confirmButtonText: 'OK',
+        }).then(() => {
+            window.location.reload(); // Reloads AFTER the user clicks "OK"
+        });
+        
+          }else {
+            throw new Error(response.message || 'Failed to add points');
+        }
+        } catch (err) {
+            console.error('Error adding points:', err);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Failed to add points. Please try again.',
+            });
+        } finally {
+            // Reset the input field and close the popup
+            setFriendCode('');
+            setShowInvitePopup(false);
+            
         }
     };
 
@@ -97,11 +179,36 @@ const EventList = ({ userId }) => {
                         <h3>{selectedEvent.event_name}</h3>
                         {isRegistered ? (
                             <>
-                                <p>Scan the QR code to check in:</p>
+                                <button 
+                                    style={styles.unregisterButton} 
+                                    onClick={handleUnregister}
+                                >
+                                    Unregister
+                                </button>
+                                <button style={styles.inviteButton} onClick={() => setShowInvitePopup(true)}>
+                                    Invite a Friend
+                                </button>
                             </>
                         ) : (
                             <button style={styles.registerButton} onClick={handleRegister}>Register Event</button>
                         )}
+                    </div>
+                </div>
+            )}
+            {showInvitePopup && (
+                <div id="invite-popup-container" style={styles.popupContainer} onClick={() => setShowInvitePopup(false)}>
+                    <div style={styles.popup} onClick={(e) => e.stopPropagation()}>
+                    <h3>Invite a Friend</h3>
+                    <input
+                        type="text"
+                        placeholder="Enter friend's code here"
+                        style={styles.inputField}
+                        value={friendCode}
+                        onChange={(e) => setFriendCode(e.target.value)}
+                    />
+                    <button style={styles.submitButton} onClick={handleInviteFriend}>
+                        Invite
+                    </button>
                     </div>
                 </div>
             )}
@@ -156,6 +263,43 @@ const styles = {
         border: "none",
         borderRadius: "5px",
         cursor: "pointer",
+    },
+    inviteButton: {
+        backgroundColor: '#28a745',
+        color: '#fff',
+        border: 'none',
+        padding: '10px 20px',
+        borderRadius: '5px',
+        cursor: 'pointer',
+        fontSize: '16px',
+        marginTop: '10px',
+      },
+      inputField: {
+        width: '100%',
+        padding: '10px',
+        margin: '10px 0',
+        borderRadius: '5px',
+        border: '1px solid #ccc',
+        fontSize: '16px',
+      },
+      submitButton: {
+        backgroundColor: '#007bff',
+        color: '#fff',
+        border: 'none',
+        padding: '10px 20px',
+        borderRadius: '5px',
+        cursor: 'pointer',
+        fontSize: '16px',
+      },
+      unregisterButton: {
+        backgroundColor: '#dc3545', // Red color
+        color: '#fff',
+        border: 'none',
+        padding: '10px 20px',
+        borderRadius: '5px',
+        cursor: 'pointer',
+        fontSize: '16px',
+        marginTop: '10px',
     },
 };
 

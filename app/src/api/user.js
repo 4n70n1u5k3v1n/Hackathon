@@ -30,3 +30,16 @@ export const redeemItem = async (userID, itemID) => {
     }
 };
 
+export const addPoints = async (userId, points) => {
+    try {
+        const response = await axios.post(`${BASE_URL}/add-points`, {
+            userId,
+            points
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error("Error adding points:", error);
+        return { success: false, message: "Error adding points." };
+    }
+};

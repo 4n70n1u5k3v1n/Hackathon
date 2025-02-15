@@ -1,6 +1,6 @@
 const { fetchAllEvents, checkUserRegistration, registerUserForEvent, getEventFromToken, getEventByUserID, editAttendance } = require("../entities/eventEntity");
 const { updatePoints } = require ("../entities/userEntity");
-const { completeChallenge, withdrawChallenge } = require ("../entities/challengeEntity");
+// const { completeChallenge } = require ("../entities/challengeEntity");
 
 exports.getAllEvents = async (req, res) => {
     try {
@@ -60,7 +60,6 @@ exports.takeAttendance = async (req, res) => {
     const {userId, eventToken} = req.query;
     try {
         const event = await getEventFromToken(eventToken);
-        await withdrawChallenge(userId, '1');
         
         if (event.length > 0) {
             const eventID = event[0].event_id;
@@ -74,8 +73,7 @@ exports.takeAttendance = async (req, res) => {
                 console.log ("edit attendance done");
                 await updatePoints (userId, 500);
                 console.log ("update points done");
-                await completeChallenge (userId, '1');  // complete join event mission
-                console.log ("challenge completed");
+                // await completeChallenge (userId, '1');  // complete join event mission
             }
             return res.status(201).json({
                 success: userAttends,

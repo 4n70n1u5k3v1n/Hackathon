@@ -1,4 +1,4 @@
-const { getLeaderboard, getUserPoints, redeemItem} = require("../entities/userEntity");
+const { getLeaderboard, getUserPoints, redeemItem, updatePoints} = require("../entities/userEntity");
 
 exports.getUserPoints = async (req, res) => {
     try {
@@ -41,3 +41,16 @@ exports.redeemItem = async(req, res) => {
         res.status(500).json({success: false, error: "Internal server error."});
     }
 }
+exports.updateUserPoints = async (req, res) => {
+    try {
+        const { userId, points} = req.body;
+        if (!userId || !points) {
+            return res.status(400).json({ success: false, message: "Missing required fields" });
+        }
+
+        const result = await updatePoints(userId, points);
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+};

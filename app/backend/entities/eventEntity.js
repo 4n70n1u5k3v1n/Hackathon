@@ -33,6 +33,17 @@ exports.registerUserForEvent = async (userId, eventId) => {
     }
 };
 
+exports.unregisterUserFromEvent = async (userId, eventId) => {
+    try {
+        const query = 'DELETE FROM USER_EVENT WHERE user_id = ? AND event_id = ?';
+        await db.execute(query, [userId, eventId]);
+        return { success: true, message: "User successfully unregistered from the event." };
+    } catch (error) {
+        console.error("Error unregistering from event:", error);
+        throw error;
+    }
+};
+
 exports.getEventFromToken = async (eventToken) => {
     try {
         const query = 'SELECT * FROM EVENT WHERE event_qr = ?';
