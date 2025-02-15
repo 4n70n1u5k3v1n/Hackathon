@@ -126,3 +126,12 @@ CREATE TABLE USER_RECOMMENDATIONS (
     FOREIGN KEY (user_id) REFERENCES USER(user_id) ON DELETE CASCADE,
     FOREIGN KEY (event_id) REFERENCES EVENT(event_id) ON DELETE CASCADE
 );
+
+CREATE TABLE USER_CHALLENGES (
+    user_id INT NOT NULL,
+    bschallenge_id INT NOT NULL,
+    status ENUM('pending', 'completed') DEFAULT 'pending',
+    PRIMARY KEY (user_id, bschallenge_id),
+    FOREIGN KEY (user_id) REFERENCES USER(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (bschallenge_id) REFERENCES BASE_CHALLENGE(bschallenge_id) ON DELETE CASCADE
+);
