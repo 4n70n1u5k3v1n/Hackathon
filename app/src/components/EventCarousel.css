@@ -2,7 +2,6 @@
 .carousel-container {
     margin: 15px auto;         /* auto centers the container horizontally */
     padding: 20px;             /* increased padding for spacing */
-    background-color: #f8f9fa;   /* light background color */
     border-radius: 15px;       /* rounded corners */
     max-width: 800px;          /* constrains the width */
     text-align: center;        /* center content inside the container */
