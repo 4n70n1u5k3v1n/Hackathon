@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {getUserPoints} from '../api/user';
 import { FaUserCircle } from "react-icons/fa";
-
   
 const Header = ({ onProfileClick, userID }) => {
   const [points, setPoints] = useState(0);
@@ -22,8 +21,8 @@ const Header = ({ onProfileClick, userID }) => {
   return (
     <header style={styles.header}>
      <FaUserCircle style={styles.profileIcon} onClick={onProfileClick} />
-      <h1 style={styles.title}><span style={{color: '#6C92EB'}}>Ge</span>ek<span style={{color: '#4C956C'}}>Sp</span>a<span style={{color: '#FCBC08'}}>nd</span></h1>
-      <div style={styles.points}>{points} Points</div>
+      <h1 className='league-spartan-bold' style={styles.title}><span style={{color: '#6C92EB'}}>Ge</span>ek<span style={{color: '#4C956C'}}>Sp</span>a<span style={{color: '#FCBC08'}}>nd</span></h1>
+      <div style={styles.points} className='roboto-bold'>{points} Points</div>
     </header>
   );
 };

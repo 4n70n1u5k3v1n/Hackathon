@@ -46,7 +46,7 @@ const LeaderboardPage = ({ userID }) => {
     <div>
       <Header onProfileClick={handleProfileClick} userID={userID} />
       <div className="leaderboardPage-container">
-        <h2 className="leaderboardPage-title">Leaderboard</h2>
+        <h2 className="leaderboardPage-title league-spartan-bold">Leaderboard</h2>
         
         {/* Podium for Top 3 */}
         <div className="leaderboardPage-podium">

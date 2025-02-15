@@ -6,6 +6,7 @@ import Skills from './pages/Skills';
 import Events from './pages/Events';
 import LeaderboardPage from './pages/LeaderboardPage';
 import RedeemPoints from './pages/RedeemPoints';
+import './fonts.css';
 
 const App = () => {
   const USERID ='1';

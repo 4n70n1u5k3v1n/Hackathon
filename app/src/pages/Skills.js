@@ -128,7 +128,7 @@ const Skills = ({ userID }) => {
             <Header onProfileClick={handleProfileClick} userID={userID} />
             <div style={{ paddingLeft: "10px", paddingRight: '10px', backgroundColor: "#fffbf5" }}>
                 <div className="skills-container">
-                    <h2 className="skills-title">Skills Exchange</h2>
+                    <h2 className="skills-title league-spartan-bold">Skills Exchange</h2>
 
                     {/* Tabs */}
                     <div className="skills-tabs">

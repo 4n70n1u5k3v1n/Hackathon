@@ -9,7 +9,7 @@ const ChallengesList = () => {
 
   return (
     <div style={styles.container}>
-      <h2>Available Challenges</h2>
+      <h2 className='league-spartan-bold'>Available Challenges</h2>
       {challenges.map((challenge) => (
         <div key={challenge.id} style={styles.challengeCard}>
           <h3>{challenge.name}</h3>
