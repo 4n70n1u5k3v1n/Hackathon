@@ -1,18 +1,14 @@
 const db = require("../db");
-const bcrypt = require("bcrypt");
 
-const user = {
-    getUserByUsername: async (username) => {
-        return new Promise ((resolve, reject) => {
-            const query = `SELECT * FROM USERS WHERE username = ?`;
-            
-            const values = [username];
-            db.query (query, values, (err, result) => {
-                if (err) {return reject (err);}
-                return resolve (result);
-            });
-        });
-    },
-}
+exports.getLeaderboard = async () => {
+    try {
+        const query = `SELECT id, username, user_gc FROM USERS ORDER BY user_gc DESC LIMIT 100`;
+        const [results] = await db.execute(query);
+        return results;
+    } catch (error) {
+        console.error("Error fetching leaderboard:", error);
+        throw error;
+    }
+};
 
-module.exports = booking;
+module.exports = router;
