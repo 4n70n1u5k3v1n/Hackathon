@@ -14,7 +14,7 @@ const Header = ({ onProfileClick, userID }) => {
     if (userID) {
       fetchPoints();
     }
-  }, [userID]);
+  }, [points]);
 
   return (
     <header style={styles.header}>

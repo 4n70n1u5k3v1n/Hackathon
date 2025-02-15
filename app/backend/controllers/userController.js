@@ -1,4 +1,4 @@
-const { getLeaderboard, getUserPoints} = require("../entities/userEntity");
+const { getLeaderboard, getUserPoints, redeemItem} = require("../entities/userEntity");
 
 exports.getUserPoints = async (req, res) => {
     try {
@@ -34,7 +34,7 @@ exports.getLeaderboard = async (req, res) => {
 exports.redeemItem = async(req, res) => {
     try{
         const {userID, itemID } = req.body;
-        const result = await this.redeemItem(userID, itemID);
+        const result = await redeemItem(userID, itemID);
         res.status(200).json(result);
     }
     catch(error){
