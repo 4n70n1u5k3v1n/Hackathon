@@ -5,14 +5,16 @@ import ProfileSidebar from '../components/ProfileSidebar';
 import { getAllChallenges } from "../api/challenges";
 import { useState, useEffect } from 'react';
 import LoadingSpinner from '../components/LoadingSpinner';
+// import ChallengesList from '../components/ChallengesList';
+import "./Missions.css";
 
 const Missions = ({userID}) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [challenges, setChallenges] = useState ([]);
   const [loading, setLoading] = useState (true);
   const [error, setError] = useState (null);
-  const [selectedChallenge, setSelectedChallenge] = useState(null);
-  const [isDone, setIsDone] = useState(false);
+  // const [selectedChallenge, setSelectedChallenge] = useState(null);
+  // const [isDone, setIsDone] = useState(false);
 
   const handleProfileClick = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -45,21 +47,18 @@ const Missions = ({userID}) => {
   return (
     <div>
       <Header onProfileClick={handleProfileClick} userID={userID} />
-        <div className="events-container"></div>
-          <div style={styles.container}>
-            <h2>Available Challenges</h2>
-            <ul style={styles.missionList}>
+        <div className="mission-container">
+            <h2 className="mission-title">Challenges</h2>
+            <div >
               {challenges.map(challenge => (
-                <li key={challenge.bschallenge_id} style={styles.challengeItem}>
+                <div key={challenge.bschallenge_id} className="mission-card">
                     <strong>{challenge.bschallenge_title}</strong>
                     <p>Points: {challenge.points}</p>
                     {/* <p>Description: {challenge.description}</p> */}
-                </li>
+                </div>
               ))}
-            </ul>
-          </div>
+            </div>
         <Navbar />
-
         {/* Profile Sidebar */}
         {isSidebarOpen && (
           <ProfileSidebar
@@ -68,57 +67,8 @@ const Missions = ({userID}) => {
           />
         )}
       </div>
+    </div>
   );
-  
-};
-
-const styles = {
-  container: {
-      padding: "20px",
-      backgroundColor: "#fffbf5",
-      borderRadius: "10px",
-      maxWidth: "600px",
-      margin: "auto",
-  },
-  missionList: {
-      listStyleType: "none",
-      padding: 0,
-  },
-  challengeItem: {
-      backgroundColor: "#ffffff",
-      padding: "15px",
-      marginBottom: "10px",
-      borderRadius: "5px",
-      boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-      cursor: "pointer",
-  },
-  popupContainer: {
-      position: "fixed",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      backgroundColor: "rgba(0, 0, 0, 0.5)",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-  },
-  popup: {
-      backgroundColor: "#fff",
-      padding: "20px",
-      borderRadius: "10px",
-      textAlign: "center",
-      boxShadow: "0 2px 10px rgba(0, 0, 0, 0.2)",
-  },
-  registerButton: {
-      padding: "10px 20px",
-      fontSize: "16px",
-      backgroundColor: "#007bff",
-      color: "#fff",
-      border: "none",
-      borderRadius: "5px",
-      cursor: "pointer",
-  },
 };
 
 export default Missions;
