@@ -5,7 +5,7 @@ const eventRoutes = require("./routes/eventRoutes");
 const userRoutes = require("./routes/userRoutes");
 const itemRoutes = require("./routes/itemRoutes");
 const challengeRoutes = require("./routes/challengeRoutes");
-const skillRoutes = require("./routes/skillsRoutes");
+const skillRoutes = require("./routes/skillRoutes");
 const app = express();
 
 app.use(bodyParser.json()); 

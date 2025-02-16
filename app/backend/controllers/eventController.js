@@ -1,4 +1,4 @@
-const { fetchAllEvents, checkUserRegistration, registerUserForEvent, getEventFromToken, getEventByUserID, editAttendance } = require("../entities/eventEntity");
+const { fetchAllEvents, checkUserRegistration, registerUserForEvent, getEventFromToken, getEventByUserID, editAttendance, unregisterUserFromEvent } = require("../entities/eventEntity");
 const { updatePoints } = require ("../entities/userEntity");
 // const { completeChallenge } = require ("../entities/challengeEntity");
 
@@ -8,6 +8,31 @@ exports.getAllEvents = async (req, res) => {
         res.status(200).json({ success: true, data: events });
     } catch (error) {
         console.error("Error fetching events:", error);
+        res.status(500).json({ success: false, error: "Internal server error." });
+    }
+};
+
+exports.unregisterFromEvent = async (req, res) => {
+    const { userId, eventId } = req.body;
+
+    if (!userId || !eventId) {
+        return res.status(400).json({ success: false, message: "Missing userId or eventId." });
+    }
+
+    try {
+        // Check if the user is registered for the event
+        const isRegistered = await checkUserRegistration(userId, eventId);
+
+        if (!isRegistered) {
+            return res.status(404).json({ success: false, message: "User is not registered for this event." });
+        }
+
+        // Unregister the user from the event
+        const result = await unregisterUserFromEvent(userId, eventId);
+
+        res.status(200).json({ success: true, message: "User successfully unregistered from the event." });
+    } catch (error) {
+        console.error("Error unregistering from event:", error);
         res.status(500).json({ success: false, error: "Internal server error." });
     }
 };
