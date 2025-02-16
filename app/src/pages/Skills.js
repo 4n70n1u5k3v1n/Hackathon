@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Swal from 'sweetalert2';
+import { FaUserCircle } from "react-icons/fa";
 import './Skills.css';
 import ProfileSidebar from '../components/ProfileSidebar';
 import {
@@ -189,7 +190,7 @@ const Skills = ({ userID }) => {
                         <div className="skills-friendsList">
                             {listings.map(user => (
                                 <div key={user.id} className="skills-friendCard">
-                                    <img src={user.profilePic} alt={user.user_fname} className="skills-profilePic" />
+                                    <FaUserCircle className='skills-profilePic' />
                                     <div className="skills-friendInfo">
                                         <h3 className="skills-username">{user.user_fname}</h3>
                                         <p className="skills">Skills Want: {user.skill_1}</p>
@@ -208,7 +209,7 @@ const Skills = ({ userID }) => {
                         <div className="skills-friendsList">
                             {requested.map(user => (
                                 <div key={user.id} className="skills-friendCard">
-                                    <img src={user.profilePic} alt={user.user_fname} className="skills-profilePic" />
+                                    <FaUserCircle className='skills-profilePic' />
                                     <div className="skills-friendInfo">
                                         <h3 className="skills-username">{user.user_fname}</h3>
                                         <p className="skills">Skills Want: {user.skill_1}</p>
@@ -227,7 +228,7 @@ const Skills = ({ userID }) => {
                         <div className="skills-friendsList">
                             {incoming.map(user => (
                                 <div key={user.id} className="skills-friendCard">
-                                    <img src={user.profilePic} alt={user.user_fname} className="skills-profilePic" />
+                                    <FaUserCircle className='skills-profilePic' />
                                     <div className="skills-friendInfo">
                                         <h3 className="skills-username">{user.user_fname}</h3>
                                         <p className="skills">Skills Want: {user.skill_1}</p>
@@ -251,7 +252,7 @@ const Skills = ({ userID }) => {
                         <div className="skills-friendsList">
                             {accepted.map(user => (
                                 <div key={user.id} className="skills-friendCard">
-                                    <img src={user.profilePic} alt={user.user_fname} className="skills-profilePic" />
+                                    <FaUserCircle className='skills-profilePic' />
                                     <div className="skills-friendInfo">
                                         <h3 className="skills-username">{user.user_fname}</h3>
                                         <p className="skills">Skills Want: {user.skill_1}</p>
