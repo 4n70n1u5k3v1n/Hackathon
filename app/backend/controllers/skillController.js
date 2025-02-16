@@ -57,8 +57,8 @@ exports.acceptSkillMatchStatus = async (req, res) => {
 
 exports.rejectSkillMatchStatus = async (req, res) => {
     try {
-        const {requestorId, acceptorId} = req.body;
-        const result = await rejectSkillMatchStatus(requestorId, acceptorId);
+        const {requestorId, acceptorId, skillsId, skillsId2} = req.body;
+        const result = await rejectSkillMatchStatus(requestorId, acceptorId, skillsId, skillsId2);
         res.status(200).json(result);
     } catch (error) {
         res.status(500).json({ message: "Internal server error." });

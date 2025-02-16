@@ -92,7 +92,9 @@ const Skills = ({ userID }) => {
         try {
             await axios.post(`${BASE_URL}/reject-skill-match-status`, {
                 requestorId: user.requestor_id,
-                acceptorId: user.acceptor_id
+                acceptorId: user.acceptor_id,
+                skillsId: user.skills_id,
+                skillsId2: user.skills_id_2
             });
             setRequested(requested.filter((req) => req.id !== user.id));
         } catch (error) {
@@ -113,7 +115,9 @@ const Skills = ({ userID }) => {
             } else if (action === "reject") {
                 await axios.post(`${BASE_URL}/reject-skill-match-status`, {
                     requestorId: user.requestor_id,
-                    acceptorId: user.acceptor_id
+                    acceptorId: user.acceptor_id,
+                    skillsId: user.skills_id,
+                    skillsId2: user.skills_id_2
                 });
             }
 

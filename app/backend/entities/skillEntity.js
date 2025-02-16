@@ -90,10 +90,10 @@ exports.acceptSkillMatchStatus = async (requestorId, acceptorId, status) => {
     }
 }
 
-exports.rejectSkillMatchStatus = async (requestorId, acceptorId) => {
+exports.rejectSkillMatchStatus = async (requestorId, acceptorId, skillsId, skillsId2) => {
     try {
-        const query = `UPDATE USER_SKILL_MATCH SET status = NULL, acceptor_id = NULL WHERE requestor_id = ? AND acceptor_id = ?`;
-        await db.execute(query, [requestorId, acceptorId]);
+        const query = `UPDATE USER_SKILL_MATCH SET status = NULL, acceptor_id = NULL WHERE requestor_id = ? AND acceptor_id = ? AND skills_id = ? AND skills_id_2 = ?`;
+        await db.execute(query, [requestorId, acceptorId, skillsId, skillsId2]);
     } catch (error) {
         console.error("Error rejecting skill match status:", error);
         throw error;

@@ -68,11 +68,13 @@ export const acceptSkillMatchStatus = async (requestorId, acceptorId, status) =>
     }
 }
 
-export const rejectSkillMatchStatus = async (requestorId, acceptorId) => {
+export const rejectSkillMatchStatus = async (requestorId, acceptorId, skillsId, skillsId2) => {
     try {
         const response = await axios.post(`${BASE_URL}/reject-skill-match-status`, {
             requestorId,
-            acceptorId
+            acceptorId,
+            skillsId,
+            skillsId2
         });
 
         return response.data;
