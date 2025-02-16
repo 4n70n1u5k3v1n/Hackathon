@@ -10,15 +10,29 @@ const EventList = ({ userId }) => {
     const [error, setError] = useState(null);
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [isRegistered, setIsRegistered] = useState(false);
-    const [showInvitePopup, setShowInvitePopup] = React.useState(false);
-    const [friendCode, setFriendCode] = React.useState('');
+    const [showInvitePopup, setShowInvitePopup] = useState(false);
+    const [friendCode, setFriendCode] = useState('');
     const [userPoints, setUserPoints] = useState(0);
+
+    // Helper function to generate dummy tags (between 1 and 5)
+    const getDummyTags = () => {
+        const possibleTags = ["Music", "Sports", "Art", "Tech", "Food", "Networking", "Outdoor", "Indoor", "Workshop", "Seminar"];
+        const count = Math.floor(Math.random() * 5) + 1; // 1 to 5 tags
+        // Shuffle the array copy and take the first count items
+        const shuffled = [...possibleTags].sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, count);
+    };
 
     useEffect(() => {
         const fetchEvents = async () => {
             try {
                 const data = await getAllEvents();
-                setEvents(data.data);
+                // Map each event to include dummy tags
+                const eventsWithTags = data.data.map(event => ({
+                    ...event,
+                    tags: getDummyTags()
+                }));
+                setEvents(eventsWithTags);
                 setLoading(false);
             } catch (err) {
                 console.error("Error fetching events:", err);
@@ -59,7 +73,7 @@ const EventList = ({ userId }) => {
                 icon: 'success',
                 title: 'Registered Successfully!',
                 confirmButtonText: 'OK',
-            })
+            });
         } catch (err) {
             console.error("Error registering for event:", err);
             setError("Failed to register.");
@@ -69,9 +83,8 @@ const EventList = ({ userId }) => {
     const handleUnregister = async () => {
         try {
             const response = await unregisterUserFromEvent(userId, selectedEvent.event_id);
-    
             if (response.success) {
-                setIsRegistered(false); // Update the state to reflect unregistration
+                setIsRegistered(false);
                 Swal.fire({
                     icon: 'success',
                     title: 'Unregistered!',
@@ -99,25 +112,20 @@ const EventList = ({ userId }) => {
 
     const handleInviteFriend = async () => {
         try {
-            // Call the backend API to add 100 points
             const response = await addPoints(userId, 100);
-
             if (response.success) {
-                // Update the user's points in the frontend state
                 setUserPoints((prevPoints) => prevPoints + 100);
-        //console.log('Friend Code:', friendCode);
-        Swal.fire({
-            icon: 'success',
-            title: 'Invitation Sent!',
-            text: `Friend code "${friendCode}" is invited.`,
-            confirmButtonText: 'OK',
-        }).then(() => {
-            window.location.reload(); // Reloads AFTER the user clicks "OK"
-        });
-        
-          }else {
-            throw new Error(response.message || 'Failed to add points');
-        }
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Invitation Sent!',
+                    text: `Friend code "${friendCode}" is invited.`,
+                    confirmButtonText: 'OK',
+                }).then(() => {
+                    window.location.reload();
+                });
+            } else {
+                throw new Error(response.message || 'Failed to add points');
+            }
         } catch (err) {
             console.error('Error adding points:', err);
             Swal.fire({
@@ -126,28 +134,24 @@ const EventList = ({ userId }) => {
                 text: 'Failed to add points. Please try again.',
             });
         } finally {
-            // Reset the input field and close the popup
             setFriendCode('');
             setShowInvitePopup(false);
-            
         }
     };
 
     const formatDateTime = (date, time) => {
         const eventDate = new Date(date);
         const formattedDate = eventDate.toLocaleDateString("en-US", {
-            weekday: "long", 
+            weekday: "long",
             year: "numeric",
-            month: "long", 
+            month: "long",
             day: "numeric"
         });
-
         const eventTime = new Date(`1970-01-01T${time}`).toLocaleTimeString("en-US", {
             hour: "numeric",
             minute: "2-digit",
-            hour12: true 
+            hour12: true
         });
-
         return `${formattedDate} at ${eventTime}`;
     };
 
@@ -169,6 +173,14 @@ const EventList = ({ userId }) => {
                         <p>{formatDateTime(event.event_date, event.event_time)}</p>
                         <p>Location: {event.event_location}</p>
                         <p>Description: {event.description}</p>
+                        {/* Display dummy tags (up to 5) */}
+                        {event.tags && (
+                            <div style={styles.tagContainer}>
+                                {event.tags.map((tag, index) => (
+                                    <span key={index} style={styles.tag}>{tag}</span>
+                                ))}
+                            </div>
+                        )}
                     </li>
                 ))}
             </ul>
@@ -179,8 +191,8 @@ const EventList = ({ userId }) => {
                         <h3>{selectedEvent.event_name}</h3>
                         {isRegistered ? (
                             <>
-                                <button 
-                                    style={styles.unregisterButton} 
+                                <button
+                                    style={styles.unregisterButton}
                                     onClick={handleUnregister}
                                 >
                                     Unregister
@@ -198,24 +210,23 @@ const EventList = ({ userId }) => {
             {showInvitePopup && (
                 <div id="invite-popup-container" style={styles.popupContainer} onClick={() => setShowInvitePopup(false)}>
                     <div style={styles.popup} onClick={(e) => e.stopPropagation()}>
-                    <h3>Invite a Friend</h3>
-                    <input
-                        type="text"
-                        placeholder="Enter friend's code here"
-                        style={styles.inputField}
-                        value={friendCode}
-                        onChange={(e) => setFriendCode(e.target.value)}
-                    />
-                    <button style={styles.submitButton} onClick={handleInviteFriend}>
-                        Invite
-                    </button>
+                        <h3>Invite a Friend</h3>
+                        <input
+                            type="text"
+                            placeholder="Enter friend's code here"
+                            style={styles.inputField}
+                            value={friendCode}
+                            onChange={(e) => setFriendCode(e.target.value)}
+                        />
+                        <button style={styles.submitButton} onClick={handleInviteFriend}>
+                            Invite
+                        </button>
                     </div>
                 </div>
             )}
         </div>
     );
 };
-
 
 const styles = {
     container: {
@@ -254,8 +265,6 @@ const styles = {
         borderRadius: "10px",
         textAlign: "center",
         boxShadow: "0 2px 10px rgba(0, 0, 0, 0.2)",
-        margin: "5%",
-        gaps: "5%",
     },
     registerButton: {
         padding: "10px 20px",
@@ -274,17 +283,17 @@ const styles = {
         borderRadius: '5px',
         cursor: 'pointer',
         fontSize: '16px',
-        margin: '2.5%',
-      },
-      inputField: {
-        width: '90%',
+        marginTop: '10px',
+    },
+    inputField: {
+        width: '100%',
         padding: '10px',
         margin: '10px 0',
         borderRadius: '5px',
         border: '1px solid #ccc',
         fontSize: '16px',
-      },
-      submitButton: {
+    },
+    submitButton: {
         backgroundColor: '#007bff',
         color: '#fff',
         border: 'none',
@@ -292,16 +301,29 @@ const styles = {
         borderRadius: '5px',
         cursor: 'pointer',
         fontSize: '16px',
-      },
-      unregisterButton: {
-        backgroundColor: '#dc3545', // Red color
+    },
+    unregisterButton: {
+        backgroundColor: '#dc3545',
         color: '#fff',
         border: 'none',
         padding: '10px 20px',
         borderRadius: '5px',
         cursor: 'pointer',
         fontSize: '16px',
-        margin: '2.5%',
+        marginTop: '10px',
+    },
+    tagContainer: {
+        marginTop: "10px",
+        display: "flex",
+        flexWrap: "wrap",
+        gap: "5px",
+    },
+    tag: {
+        backgroundColor: "#e0e0e0",
+        color: "#333",
+        padding: "5px 10px",
+        borderRadius: "15px",
+        fontSize: "12px",
     },
 };
 
