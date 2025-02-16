@@ -287,10 +287,10 @@ const styles = {
         borderRadius: '5px',
         cursor: 'pointer',
         fontSize: '16px',
-        marginTop: '10px',
+        margin: '2.5%',
     },
     inputField: {
-        width: '100%',
+        width: '90%',
         padding: '10px',
         margin: '10px 0',
         borderRadius: '5px',
@@ -314,7 +314,7 @@ const styles = {
         borderRadius: '5px',
         cursor: 'pointer',
         fontSize: '16px',
-        marginTop: '10px',
+        margin: '2.5%',
     },
     tagContainer: {
         marginTop: "10px",
