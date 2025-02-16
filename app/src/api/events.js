@@ -3,6 +3,18 @@ import axios from "axios";
 const BASE_URL = "https://hackathon-lu32dxaw4a-uc.a.run.app/api"; 
 // const BASE_URL = "http://localhost:8080/api"; 
 
+
+export const getEventTags = async (eventId) => {
+    try {
+        const response = await axios.get(`${BASE_URL}/event-tags/${eventId}`);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching event tags:", error);
+        return { success: false, message: "Error retrieving event tags." };
+    }
+};
+
+
 export const getAllEvents = async () => {
     try {
         const response = await axios.get(`${BASE_URL}/events`);

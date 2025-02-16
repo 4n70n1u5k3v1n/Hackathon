@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllEvents, checkUserEvent, registerUserForEvent, unregisterUserFromEvent } from "../api/events";
+import { getAllEvents, checkUserEvent, registerUserForEvent, unregisterUserFromEvent, getEventTags } from "../api/events";
 import { addPoints, getUserPoints } from "../api/user";
 import LoadingSpinner from '../components/LoadingSpinner';
 import Swal from 'sweetalert2';
@@ -14,23 +14,26 @@ const EventList = ({ userId }) => {
     const [friendCode, setFriendCode] = useState('');
     const [userPoints, setUserPoints] = useState(0);
 
-    // Helper function to generate dummy tags (between 1 and 5)
-    const getDummyTags = () => {
-        const possibleTags = ["Music", "Sports", "Art", "Tech", "Food", "Networking", "Outdoor", "Indoor", "Workshop", "Seminar"];
-        const count = Math.floor(Math.random() * 5) + 1; // 1 to 5 tags
-        // Shuffle the array copy and take the first count items
-        const shuffled = [...possibleTags].sort(() => 0.5 - Math.random());
-        return shuffled.slice(0, count);
+    const fetchEventTags = async (eventId) => {
+        try {
+            const tags = await getEventTags(eventId); 
+            if (Array.isArray(tags)) {
+                return tags; 
+            }
+            return [];
+        } catch (error) {
+            console.error("Error fetching event tags:", error);
+            return [];
+        }
     };
 
     useEffect(() => {
         const fetchEvents = async () => {
             try {
                 const data = await getAllEvents();
-                // Map each event to include dummy tags
-                const eventsWithTags = data.data.map(event => ({
-                    ...event,
-                    tags: getDummyTags()
+                const eventsWithTags = await Promise.all(data.data.map(async (event) => {
+                    const tags = await fetchEventTags(event.event_id); 
+                    return { ...event, tags };
                 }));
                 setEvents(eventsWithTags);
                 setLoading(false);
@@ -40,9 +43,10 @@ const EventList = ({ userId }) => {
                 setLoading(false);
             }
         };
+        
         const fetchUserPoints = async () => {
             try {
-                const points = await getUserPoints(userId); // Fetch user points
+                const points = await getUserPoints(userId); 
                 setUserPoints(points);
             } catch (err) {
                 console.error("Error fetching user points:", err);
@@ -173,14 +177,14 @@ const EventList = ({ userId }) => {
                         <p>{formatDateTime(event.event_date, event.event_time)}</p>
                         <p>Location: {event.event_location}</p>
                         <p>Description: {event.description}</p>
-                        {/* Display dummy tags (up to 5) */}
                         {event.tags && (
                             <div style={styles.tagContainer}>
                                 {event.tags.map((tag, index) => (
-                                    <span key={index} style={styles.tag}>{tag}</span>
+                                    <span key={index} style={styles.tag}>{tag.tag_name}</span>
                                 ))}
                             </div>
                         )}
+
                     </li>
                 ))}
             </ul>

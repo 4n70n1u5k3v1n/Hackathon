@@ -73,3 +73,16 @@ exports.editAttendance = async (userId, eventId) => {
         console.error("Error taking user's attendance");
     }
 }
+exports.getEventTags = async (eventId) => {
+    try {
+        const query = `
+            SELECT T.tag_name 
+            FROM EVENT_TAG ET
+            JOIN TAG T ON ET.tag_id = T.tag_id
+            WHERE ET.event_id = ?`;
+        const [results] = await db.execute(query, [eventId]);
+        return results;
+    } catch (error) {
+        throw error;
+    }
+};

@@ -1,4 +1,4 @@
-const { fetchAllEvents, checkUserRegistration, registerUserForEvent, getEventFromToken, getEventByUserID, editAttendance, unregisterUserFromEvent } = require("../entities/eventEntity");
+const { fetchAllEvents, checkUserRegistration, registerUserForEvent, getEventFromToken, getEventByUserID, editAttendance, unregisterUserFromEvent, getEventTags } = require("../entities/eventEntity");
 const { updatePoints } = require ("../entities/userEntity");
 // const { completeChallenge } = require ("../entities/challengeEntity");
 
@@ -116,3 +116,16 @@ exports.takeAttendance = async (req, res) => {
         res.status(500).json({ success: false, error: "Internal server error." });
     }
 }
+
+exports.getEventTagsController = async (req, res) => {
+    try {
+        const { eventId } = req.params;
+        if (!eventId) {
+            return res.status(400).json({ success: false, message: "Missing event ID" });
+        }
+        const tags = await getEventTags(eventId);
+        res.status(200).json(tags);
+    } catch (error) {
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+};
