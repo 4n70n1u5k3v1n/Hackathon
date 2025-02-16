@@ -80,7 +80,7 @@ const LeaderboardPage = ({ userID }) => {
 
       <Navbar />
       {isSidebarOpen && (
-        <ProfileSidebar onClose={() => setIsSidebarOpen(false)} style={{ left: isSidebarOpen ? '0' : '-50%' }} />
+        <ProfileSidebar onClose={() => setIsSidebarOpen(false)} userID={userID} style={{ left: isSidebarOpen ? '0' : '-50%' }} />
       )}
     </div>
   );

@@ -52,3 +52,17 @@ exports.updatePoints = async (userId, ptIncrease) => {
         throw error;
     }
 };
+
+exports.getUserTags = async (userId) => {
+    try {
+        const query = `
+            SELECT T.tag_name 
+            FROM USER_TAG UT
+            JOIN TAG T ON UT.tag_id = T.tag_id
+            WHERE UT.user_id = ?`;
+        const [results] = await db.execute(query, [userId]);
+        return results;
+    } catch (error) {
+        throw error;
+    }
+};

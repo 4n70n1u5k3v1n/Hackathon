@@ -282,7 +282,7 @@ const Skills = ({ userID }) => {
                 )}
             </div>
             <Navbar />
-            {isSidebarOpen && (<ProfileSidebar onClose={() => setIsSidebarOpen(false)} style={{ left: isSidebarOpen ? '0' : '-50%' }} />)}
+            {isSidebarOpen && (<ProfileSidebar onClose={() => setIsSidebarOpen(false)} userID={userID} style={{ left: isSidebarOpen ? '0' : '-50%' }} />)}
         </div>
     );
 };

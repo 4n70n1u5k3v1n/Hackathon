@@ -43,3 +43,13 @@ export const addPoints = async (userId, points) => {
         return { success: false, message: "Error adding points." };
     }
 };
+
+export const getUserTags = async (userID) => {
+    try {
+        const response = await axios.get(`${BASE_URL}/user-tags/${userID}`);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching user tags:", error);
+        return { success: false, message: "Error retrieving user tags." };
+    }
+};

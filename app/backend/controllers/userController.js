@@ -1,5 +1,17 @@
-const { getLeaderboard, getUserPoints, redeemItem, updatePoints} = require("../entities/userEntity");
+const { getLeaderboard, getUserPoints, redeemItem, updatePoints, getUserTags} = require("../entities/userEntity");
 
+exports.getUserTagsController = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        if (!userId) {
+            return res.status(400).json({ success: false, message: "Missing user ID" });
+        }
+        const tags = await getUserTags(userId);
+        res.status(200).json(tags);
+    } catch (error) {
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+};
 exports.getUserPoints = async (req, res) => {
     try {
         const { userID } = req.query;
@@ -54,3 +66,4 @@ exports.updateUserPoints = async (req, res) => {
         res.status(500).json({ success: false, error: "Internal server error" });
     }
 };
+

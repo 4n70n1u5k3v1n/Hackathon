@@ -29,6 +29,7 @@ const Home = ({ userID }) => {
       {isSidebarOpen && (
         <ProfileSidebar
           onClose={() => setIsSidebarOpen(false)}
+          userID={userID} 
           className={isSidebarOpen ? 'home-profile-sidebar-open' : 'home-profile-sidebar-closed'}
         />
       )}
