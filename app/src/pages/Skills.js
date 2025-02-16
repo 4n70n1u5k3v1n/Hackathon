@@ -83,6 +83,7 @@ const Skills = ({ userID }) => {
                 skillId2: user.skills_id_2
             });
             setListings(listings.filter((listing) => listing.id !== user.id));
+            await fetchUserSkills();
         } catch (error) {
             console.error("Error sending request:", error);
         }
@@ -97,6 +98,7 @@ const Skills = ({ userID }) => {
                 skillsId2: user.skills_id_2
             });
             setRequested(requested.filter((req) => req.id !== user.id));
+            await fetchUserSkills();
         } catch (error) {
             console.error("Error canceling request:", error);
         }
@@ -122,6 +124,7 @@ const Skills = ({ userID }) => {
             }
 
             setIncoming(incoming.filter((req) => req.id !== user.id));
+            await fetchUserSkills();
         } catch (error) {
             console.error(`Error ${action}ing request:`, error);
         }
