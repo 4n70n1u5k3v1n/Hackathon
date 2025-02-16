@@ -254,6 +254,8 @@ const styles = {
         borderRadius: "10px",
         textAlign: "center",
         boxShadow: "0 2px 10px rgba(0, 0, 0, 0.2)",
+        margin: "5%",
+        gaps: "5%",
     },
     registerButton: {
         padding: "10px 20px",
@@ -272,10 +274,10 @@ const styles = {
         borderRadius: '5px',
         cursor: 'pointer',
         fontSize: '16px',
-        marginTop: '10px',
+        margin: '2.5%',
       },
       inputField: {
-        width: '100%',
+        width: '90%',
         padding: '10px',
         margin: '10px 0',
         borderRadius: '5px',
@@ -299,7 +301,7 @@ const styles = {
         borderRadius: '5px',
         cursor: 'pointer',
         fontSize: '16px',
-        marginTop: '10px',
+        margin: '2.5%',
     },
 };
 
