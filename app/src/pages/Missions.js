@@ -5,7 +5,6 @@ import ProfileSidebar from '../components/ProfileSidebar';
 import { getAllChallenges } from "../api/challenges";
 import { useState, useEffect } from 'react';
 import LoadingSpinner from '../components/LoadingSpinner';
-import ChallengesList from '../components/ChallengesList';
 
 const Missions = ({userID}) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
