@@ -14,6 +14,15 @@ export const getEventTags = async (eventId) => {
     }
 };
 
+export const getUserRecommendedEvents = async (userId) => {
+    try {
+        const response = await axios.get(`${BASE_URL}/user-recommendations/${userId}`);
+        return response.data; 
+    } catch (error) {
+        console.error("Error fetching recommended events:", error);
+        return { success: false, message: "Error retrieving event recommendations." };
+    }
+};
 
 export const getAllEvents = async () => {
     try {

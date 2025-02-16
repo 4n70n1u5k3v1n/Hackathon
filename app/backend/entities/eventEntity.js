@@ -11,6 +11,26 @@ exports.fetchAllEvents = async () => {
     }
 };
 
+
+exports.getUserRecommendations = async (userId) => {
+    try {
+        const query = `
+            SELECT E.*
+            FROM USER_RECOMMENDATIONS UR
+            JOIN EVENT E ON UR.event_id = E.event_id
+            WHERE UR.user_id = ?
+            ORDER BY UR.score DESC;
+        `;
+        console.log('userId entity: ',userId);
+        const [results] = await db.execute(query, [userId]);
+        console.log(results);
+        return results;
+    } catch (error) {
+        throw error;
+    }
+};
+
+
 exports.checkUserRegistration = async (userId, eventId) => {
     try {
         const query = 'SELECT * FROM USER_EVENT WHERE user_id = ? AND event_id = ?';

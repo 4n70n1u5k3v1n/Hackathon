@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './EventCarousel.css'; 
-import { getAllEvents } from '../api/events';
+import { getUserRecommendedEvents} from '../api/events';
 import LoadingSpinner from '../components/LoadingSpinner';
 
-const EventCarousel = () => {
+const EventCarousel = ({userID}) => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -15,17 +15,18 @@ const EventCarousel = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const data = await getAllEvents();
-        setEvents(data.data.slice(0, 5)); 
+        const data = await getUserRecommendedEvents(userID);
+        setEvents(data.slice(0, 5)); 
       } catch (error) {
-        console.error("Error fetching events:", error);
+        console.error("Error fetching recommended events:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchEvents().then(() => console.log('Events fetched'));
-  }, []);
+    fetchEvents().then(() => console.log('Recommended events fetched'));
+  }, [userID]);
+
 
   const settings = {
     dots: true,

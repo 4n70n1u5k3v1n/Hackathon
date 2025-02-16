@@ -20,7 +20,7 @@ const Home = ({ userID }) => {
         className={`home-blur-overlay ${isSidebarOpen ? 'home-blur-overlay-active' : ''}`}>
         <Header onProfileClick={handleProfileClick} userID={userID} />
         <div className="home-container">
-            <EventCarousel />
+            <EventCarousel  userID={userID}/>
             <ChallengesList />
             <Leaderboard />
         </div>
