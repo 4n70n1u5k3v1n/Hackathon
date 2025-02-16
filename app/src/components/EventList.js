@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllEvents, checkUserEvent, registerUserForEvent } from "../api/events";
+import { getAllEvents, checkUserEvent, registerUserForEvent, unregisterUserFromEvent } from "../api/events";
 import { addPoints, getUserPoints } from "../api/user";
 import LoadingSpinner from '../components/LoadingSpinner';
 import Swal from 'sweetalert2';
@@ -58,6 +58,31 @@ const EventList = ({ userId }) => {
         } catch (err) {
             console.error("Error registering for event:", err);
             setError("Failed to register.");
+        }
+    };
+
+    const handleUnregister = async () => {
+        try {
+            const response = await unregisterUserFromEvent(userId, selectedEvent.event_id);
+    
+            if (response.success) {
+                setIsRegistered(false); // Update the state to reflect unregistration
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Unregistered!',
+                    text: 'You have successfully unregistered from the event.',
+                    confirmButtonText: 'OK',
+                });
+            } else {
+                throw new Error(response.message || 'Failed to unregister.');
+            }
+        } catch (error) {
+            console.error('Error unregistering:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Failed to unregister. Please try again.',
+            });
         }
     };
 
@@ -145,7 +170,12 @@ const EventList = ({ userId }) => {
                         <h3>{selectedEvent.event_name}</h3>
                         {isRegistered ? (
                             <>
-                                <p>Scan the QR code to check in:</p>
+                                <button 
+                                    style={styles.unregisterButton} 
+                                    onClick={handleUnregister}
+                                >
+                                    Unregister
+                                </button>
                                 <button style={styles.inviteButton} onClick={() => setShowInvitePopup(true)}>
                                     Invite a Friend
                                 </button>
@@ -252,6 +282,16 @@ const styles = {
         cursor: 'pointer',
         fontSize: '16px',
       },
+      unregisterButton: {
+        backgroundColor: '#dc3545', // Red color
+        color: '#fff',
+        border: 'none',
+        padding: '10px 20px',
+        borderRadius: '5px',
+        cursor: 'pointer',
+        fontSize: '16px',
+        marginTop: '10px',
+    },
 };
 
 export default EventList;

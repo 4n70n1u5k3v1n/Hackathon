@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const BASE_URL = "https://hackathon-lu32dxaw4a-uc.a.run.app/api"; 
-const BASE_URL = "http://localhost:8080/api"; 
+ const BASE_URL = "https://hackathon-lu32dxaw4a-uc.a.run.app/api"; 
+//const BASE_URL = "http://localhost:8080/api"; 
 
 export const getAllEvents = async () => {
     try {
@@ -37,6 +37,19 @@ export const registerUserForEvent = async (userId, eventId) => {
     } catch (error) {
         console.error("Error registering user for event:", error);
         throw error;
+    }
+};
+
+export const unregisterUserFromEvent = async (userId, eventId) => {
+    try {
+        const response = await axios.post(`${BASE_URL}/unregister`, {
+            userId,
+            eventId
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Error unregistering from event:", error);
+        return { success: false, message: "Error unregistering from event." };
     }
 };
 
