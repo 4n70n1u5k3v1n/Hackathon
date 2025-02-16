@@ -40,7 +40,7 @@ const ProfileSidebar = ({ onClose, userID }) => {
             </button>
             <div style={styles.header}>
                 <FaUserCircle style={styles.profileIcon} />
-                <span style={styles.username}>User123</span>
+                <span style={styles.username}>alice123</span>
                 <div style={styles.tagContainer}>
                     {tags.length > 0 ? (
                         tags.map((tag, index) => (
