@@ -16,7 +16,7 @@ const EventCarousel = () => {
     const fetchEvents = async () => {
       try {
         const data = await getAllEvents();
-        setEvents(data.data);
+        setEvents(data.data.slice(0, 5)); 
       } catch (error) {
         console.error("Error fetching events:", error);
       } finally {
